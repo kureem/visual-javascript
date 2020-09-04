@@ -14,6 +14,10 @@ public class Alert extends BaseBootstrap {
 
 	private boolean closing = false;
 
+	/**
+	 * Bootstrap Alert implementation
+	 * @param name
+	 */
 	public Alert(String name) {
 		super(name, "div");
 		addClass("alert");

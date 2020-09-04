@@ -1,6 +1,7 @@
 package framework.components.boostrap;
 
 import framework.components.JSContainer;
+import framework.components.boostrap.Constants.ScreenSize;
 
 public class ListGroup extends JSContainer {
 
@@ -31,6 +32,19 @@ public class ListGroup extends JSContainer {
 	
 	public boolean isHorizontal() {
 		return hasClass("list-group-horizontal");
+	}
+	
+	private void clearHorizontalCls() {
+		removeClass("list-group-horizontal");
+		for(ScreenSize size : ScreenSize.values()) {
+			removeClass("list-group-horizontal-" + size.getValue());
+		}
+	}
+	
+	
+	public void setHorizontal(ScreenSize screenSize) {
+		clearHorizontalCls();
+		addClass("list-group-horizontal-" + screenSize.getValue());
 	}
 	
 	public void addItem(ListGroupItem item) {
