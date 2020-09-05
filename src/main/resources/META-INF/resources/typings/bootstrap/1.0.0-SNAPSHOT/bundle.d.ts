@@ -79,6 +79,42 @@ declare class CardFooter extends JSContainer {
 declare class CardHeader extends JSContainer {
     constructor(name: string);
 }
+declare class Carousel extends JSContainer {
+    inner: JSContainer;
+    controlPrev: JSContainer;
+    controlNext: JSContainer;
+    constructor(name: string);
+    decoratecontrol(control: JSContainer, dir: string): void;
+    setShowControls(b: boolean): void;
+    isShowControls(): boolean;
+    setCrossFade(b: boolean): void;
+    isCrossFade(): boolean;
+    addItem(item: CarouselItem): void;
+    setInterval(interval: number): void;
+    setKeyboard(b: boolean): void;
+    setPauseOnHover(b: boolean): void;
+    setRideCarousel(b: boolean): void;
+    setWrap(b: boolean): void;
+    setTouch(b: boolean): void;
+    cycle(): void;
+    pause(): void;
+    prev(): void;
+    next(): void;
+    dispose(): void;
+    invoke(method: string): void;
+}
+declare class CarouselItem extends JSContainer {
+    img: JSContainer;
+    caption: JSContainer;
+    title: JSContainer;
+    subtitle: JSContainer;
+    constructor(name: string);
+    setShowCaption(b: boolean): void;
+    isShowCaption(): boolean;
+    setTitle(str: string): void;
+    setSubtitle(str: string): void;
+    setInterval(interval: number): void;
+}
 declare class Constants {
 }
 declare namespace Constants {
@@ -134,6 +170,22 @@ declare namespace Constants {
         name(): string;
         ordinal(): number;
     }
+    enum ScreenSize {
+        SMALL = 0,
+        MEDIUM = 1,
+        LARGE = 2,
+        EXTRA_LARGE = 3,
+    }
+    /** @ignore */
+    class ScreenSize_$WRAPPER {
+        protected _$ordinal: number;
+        protected _$name: string;
+        value: any;
+        constructor(_$ordinal: number, _$name: string, value: any);
+        getValue(): string;
+        name(): string;
+        ordinal(): number;
+    }
 }
 declare class Dropdown extends JSContainer {
     button: Button;
@@ -159,6 +211,17 @@ declare namespace DropdownMenu {
         constructor(name: string, text: string);
         setText(text: string): DropdownMenu.DropdownItem;
     }
+}
+declare class ListGroup extends JSContainer {
+    constructor(name: string, tag: string);
+    setFlush(b: boolean): void;
+    isFlush(): boolean;
+    setHorizontal$boolean(b: boolean): void;
+    isHorizontal(): boolean;
+    clearHorizontalCls(): void;
+    setHorizontal$framework_components_boostrap_Constants_ScreenSize(screenSize: Constants.ScreenSize): void;
+    setHorizontal(screenSize?: any): any;
+    addItem(item: ListGroupItem): void;
 }
 declare class Nav extends JSContainer {
     type: Nav.Type;
@@ -243,6 +306,12 @@ declare class Progress extends JSContainer {
     setValue(value: number): void;
     getBar(): JSContainer;
 }
+/**
+ * Bootstrap Alert implementation
+ * @param {string} name
+ * @class
+ * @extends BaseBootstrap
+ */
 declare class Alert extends BaseBootstrap {
     heading: JSContainer;
     body: JSContainer;
@@ -288,4 +357,18 @@ declare class Button extends BaseBootstrap {
     setDisabled(disabled: boolean): void;
     isBlock(): boolean;
     setBlock(block: boolean): void;
+}
+declare class ListGroupItem extends BaseBootstrap {
+    constructor(name: string, tag: string);
+    /**
+     *
+     * @return {string}
+     */
+    getBoostrapName(): string;
+    setActive(b: boolean): void;
+    isActive(): boolean;
+    setDisabled(b: boolean): void;
+    isDisabled(): boolean;
+    setActionable(b: boolean): void;
+    isActionable(): boolean;
 }

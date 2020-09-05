@@ -18,13 +18,13 @@ class BaseBootstrap extends JSContainer {
     }
     clearContexts() {
         {
-            let array122 = function () { let result = []; for (let val in Constants.Context) {
+            let array136 = function () { let result = []; for (let val in Constants.Context) {
                 if (!isNaN(val)) {
                     result.push(parseInt(val, 10));
                 }
             } return result; }();
-            for (let index121 = 0; index121 < array122.length; index121++) {
-                let context = array122[index121];
+            for (let index135 = 0; index135 < array136.length; index135++) {
+                let context = array136[index135];
                 {
                     this.removeClass(this.getBoostrapName() + "-" + Constants.Context["_$wrappers"][context].getValue());
                 }
@@ -58,9 +58,9 @@ class Breadcrumb extends JSContainer {
     }
     activate(name) {
         {
-            let array124 = this.getChildren();
-            for (let index123 = 0; index123 < array124.length; index123++) {
-                let r = array124[index123];
+            let array138 = this.getChildren();
+            for (let index137 = 0; index137 < array138.length; index137++) {
+                let r = array138[index137];
                 {
                     let item = r;
                     if (item.getName() === name) {
@@ -283,6 +283,132 @@ class CardHeader extends JSContainer {
 }
 CardHeader["__class"] = "framework.components.boostrap.CardHeader";
 CardHeader["__interfaces"] = ["framework.components.api.Renderable"];
+class Carousel extends JSContainer {
+    constructor(name) {
+        super(name, "div");
+        /*private*/ this.inner = new JSContainer("inner", "div").addClass("carousel-inner");
+        /*private*/ this.controlPrev = new JSContainer("control-prev", "a");
+        /*private*/ this.controlNext = new JSContainer("control-next", "a");
+        this.addClass("carousel");
+        this.addClass("slide");
+        this.addChild(this.inner);
+        this.addChild(this.controlPrev);
+        this.addChild(this.controlNext);
+        this.decoratecontrol(this.controlPrev, "prev");
+        this.decoratecontrol(this.controlNext, "next");
+    }
+    /*private*/ decoratecontrol(control, dir) {
+        control.addClass("carousel-control-" + dir);
+        control.setAttribute("href", "#" + this.getId()).setAttribute("role", "button").setAttribute("data-slide", dir);
+        control.addChild(new JSContainer("span").addClass("carousel-control-" + dir + "-icon").setAttribute("aria-hidden", "true"));
+        control.addChild(new JSContainer("span").addClass("sr-only").setHtml(dir));
+    }
+    setShowControls(b) {
+        this.controlPrev.setStyle("display", b ? null : "none");
+        this.controlNext.setStyle("display", b ? null : "none");
+    }
+    isShowControls() {
+        return this.controlPrev.getStyle("display") !== "none";
+    }
+    setCrossFade(b) {
+        if (b && !this.hasClass("carousel-fade")) {
+            this.addClass("carousel-fade");
+        }
+        else {
+            if (this.hasClass("carousel-fade")) {
+                this.removeClass("carousel-fade");
+            }
+        }
+    }
+    isCrossFade() {
+        return this.hasClass("carousel-fade");
+    }
+    addItem(item) {
+        this.inner.addChild(item);
+    }
+    setInterval(interval) {
+        this.setAttribute("data-interval", interval.toString());
+    }
+    setKeyboard(b) {
+        this.setAttribute("keyboard", b ? "true" : "false");
+    }
+    setPauseOnHover(b) {
+        if (b) {
+            this.setAttribute("data-pause", "hover");
+        }
+        else {
+            this.setAttribute("data-pause", null);
+        }
+    }
+    setRideCarousel(b) {
+        if (b) {
+            this.setAttribute("data-ride", "carousel");
+        }
+        else {
+            this.setAttribute("data-ride", null);
+        }
+    }
+    setWrap(b) {
+        this.setAttribute("wrap", b ? "true" : "false");
+    }
+    setTouch(b) {
+        this.setAttribute("touch", b ? "true" : "false");
+    }
+    cycle() {
+        this.invoke("cycle");
+    }
+    pause() {
+        this.invoke("pause");
+    }
+    prev() {
+        this.invoke("prev");
+    }
+    next() {
+        this.invoke("next");
+    }
+    dispose() {
+        this.invoke("dispose");
+    }
+    /*private*/ invoke(method) {
+        let el = this.getNative();
+        let fn = el["carousel"];
+        fn.call(el, method);
+    }
+}
+Carousel["__class"] = "framework.components.boostrap.Carousel";
+Carousel["__interfaces"] = ["framework.components.api.Renderable"];
+class CarouselItem extends JSContainer {
+    constructor(name) {
+        super(name, "div");
+        /*private*/ this.img = new JSContainer("img", "img").addClass("d-block w-100");
+        /*private*/ this.caption = new JSContainer("caption", "div").addClass("carousel-caption d-none d-md-block");
+        /*private*/ this.title = new JSContainer("title", "h5");
+        /*private*/ this.subtitle = new JSContainer("subtitle", "p");
+        this.addChild(this.img);
+        this.addChild(this.caption);
+        this.caption.addChild(this.title).addChild(this.subtitle);
+        this.caption.setStyle("display", "none");
+    }
+    setShowCaption(b) {
+        this.caption.setStyle("display", b ? null : "none");
+    }
+    isShowCaption() {
+        return this.caption.getStyle("display") !== "none";
+    }
+    setTitle(str) {
+        this.title.setHtml(str);
+        this.setShowCaption(true);
+    }
+    setSubtitle(str) {
+        this.subtitle.setHtml(str);
+        this.setShowCaption(true);
+    }
+    setInterval(interval) {
+        this.setAttribute("data-interval", interval.toString());
+    }
+}
+CarouselItem["__class"] = "framework.components.boostrap.CarouselItem";
+CarouselItem["__interfaces"] = ["framework.components.api.Renderable"];
 class Constants {
 }
 Constants["__class"] = "framework.components.boostrap.Constants";
@@ -369,6 +495,32 @@ Constants["__class"] = "framework.components.boostrap.Constants";
     JustifyContent["__class"] = "framework.components.boostrap.Constants.JustifyContent";
     JustifyContent["__interfaces"] = ["java.lang.Comparable", "java.io.Serializable"];
     JustifyContent["_$wrappers"] = [new JustifyContent_$WRAPPER(0, "START", "start"), new JustifyContent_$WRAPPER(1, "CENTER", "center"), new JustifyContent_$WRAPPER(2, "END", "end"), new JustifyContent_$WRAPPER(3, "AROUND", "around"), new JustifyContent_$WRAPPER(4, "BETWEEN", "between")];
+    var ScreenSize;
+    (function (ScreenSize) {
+        ScreenSize[ScreenSize["SMALL"] = 0] = "SMALL";
+        ScreenSize[ScreenSize["MEDIUM"] = 1] = "MEDIUM";
+        ScreenSize[ScreenSize["LARGE"] = 2] = "LARGE";
+        ScreenSize[ScreenSize["EXTRA_LARGE"] = 3] = "EXTRA_LARGE";
+    })(ScreenSize = Constants.ScreenSize || (Constants.ScreenSize = {}));
+    /** @ignore */
+    class ScreenSize_$WRAPPER {
+        constructor(_$ordinal, _$name, value) {
+            this._$ordinal = _$ordinal;
+            this._$name = _$name;
+            if (this.value === undefined)
+                this.value = null;
+            this.value = value;
+        }
+        getValue() {
+            return this.value;
+        }
+        name() { return this._$name; }
+        ordinal() { return this._$ordinal; }
+    }
+    Constants.ScreenSize_$WRAPPER = ScreenSize_$WRAPPER;
+    ScreenSize["__class"] = "framework.components.boostrap.Constants.ScreenSize";
+    ScreenSize["__interfaces"] = ["java.lang.Comparable", "java.io.Serializable"];
+    ScreenSize["_$wrappers"] = [new ScreenSize_$WRAPPER(0, "SMALL", "sm"), new ScreenSize_$WRAPPER(1, "MEDIUM", "md"), new ScreenSize_$WRAPPER(2, "LARGE", "lg"), new ScreenSize_$WRAPPER(3, "EXTRA_LARGE", "xl")];
 })(Constants || (Constants = {}));
 class Dropdown extends JSContainer {
     constructor(name, tag) {
@@ -449,6 +601,69 @@ DropdownMenu["__interfaces"] = ["framework.components.api.Renderable"];
     DropdownItem["__class"] = "framework.components.boostrap.DropdownMenu.DropdownItem";
     DropdownItem["__interfaces"] = ["framework.components.api.Renderable"];
 })(DropdownMenu || (DropdownMenu = {}));
+class ListGroup extends JSContainer {
+    constructor(name, tag) {
+        super(name, tag);
+        this.addClass("list-group");
+    }
+    setFlush(b) {
+        if (b && !this.hasClass("list-group-flush")) {
+            this.addClass("list-group-flush");
+        }
+        else if (!b && this.hasClass("list-group-flush")) {
+            this.removeClass("list-group-flush");
+        }
+    }
+    isFlush() {
+        return this.hasClass("list-group-flush");
+    }
+    setHorizontal$boolean(b) {
+        if (b && !this.hasClass("list-group-horizontal")) {
+            this.addClass("list-group-horizontal");
+        }
+        else if (!b && this.hasClass("list-group-horizontal")) {
+            this.removeClass("list-group-horizontal");
+        }
+    }
+    isHorizontal() {
+        return this.hasClass("list-group-horizontal");
+    }
+    /*private*/ clearHorizontalCls() {
+        this.removeClass("list-group-horizontal");
+        {
+            let array140 = function () { let result = []; for (let val in Constants.ScreenSize) {
+                if (!isNaN(val)) {
+                    result.push(parseInt(val, 10));
+                }
+            } return result; }();
+            for (let index139 = 0; index139 < array140.length; index139++) {
+                let size = array140[index139];
+                {
+                    this.removeClass("list-group-horizontal-" + Constants.ScreenSize["_$wrappers"][size].getValue());
+                }
+            }
+        }
+    }
+    setHorizontal$framework_components_boostrap_Constants_ScreenSize(screenSize) {
+        this.clearHorizontalCls();
+        this.addClass("list-group-horizontal-" + Constants.ScreenSize["_$wrappers"][screenSize].getValue());
+    }
+    setHorizontal(screenSize) {
+        if (((typeof screenSize === 'number') || screenSize === null)) {
+            return this.setHorizontal$framework_components_boostrap_Constants_ScreenSize(screenSize);
+        }
+        else if (((typeof screenSize === 'boolean') || screenSize === null)) {
+            return this.setHorizontal$boolean(screenSize);
+        }
+        else
+            throw new Error('invalid overload');
+    }
+    addItem(item) {
+        this.addChild(item);
+    }
+}
+ListGroup["__class"] = "framework.components.boostrap.ListGroup";
+ListGroup["__interfaces"] = ["framework.components.api.Renderable"];
 class Nav extends JSContainer {
     constructor(name, tag) {
         super(name, tag);
@@ -459,13 +674,13 @@ class Nav extends JSContainer {
     }
     setJustifyContent(justifyContent) {
         {
-            let array126 = function () { let result = []; for (let val in Constants.JustifyContent) {
+            let array142 = function () { let result = []; for (let val in Constants.JustifyContent) {
                 if (!isNaN(val)) {
                     result.push(parseInt(val, 10));
                 }
             } return result; }();
-            for (let index125 = 0; index125 < array126.length; index125++) {
-                let js = array126[index125];
+            for (let index141 = 0; index141 < array142.length; index141++) {
+                let js = array142[index141];
                 {
                     this.removeClass("justify-content-" + Constants.JustifyContent["_$wrappers"][js].getValue());
                 }
@@ -480,13 +695,13 @@ class Nav extends JSContainer {
     setType(type) {
         this.type = type;
         {
-            let array128 = function () { let result = []; for (let val in Nav.Type) {
+            let array144 = function () { let result = []; for (let val in Nav.Type) {
                 if (!isNaN(val)) {
                     result.push(parseInt(val, 10));
                 }
             } return result; }();
-            for (let index127 = 0; index127 < array128.length; index127++) {
-                let t = array128[index127];
+            for (let index143 = 0; index143 < array144.length; index143++) {
+                let t = array144[index143];
                 {
                     if (Nav.Type["_$wrappers"][t].getValue() !== Nav.Type["_$wrappers"][type].getValue() && Nav.Type["_$wrappers"][t].getValue() !== Nav.Type["_$wrappers"][Nav.Type.LINKS].getValue())
                         this.removeClass(Nav.Type["_$wrappers"][t].getValue());
@@ -517,13 +732,13 @@ class Nav extends JSContainer {
     setSpacing(spacing) {
         this.spacing = spacing;
         {
-            let array130 = function () { let result = []; for (let val in Nav.Spacing) {
+            let array146 = function () { let result = []; for (let val in Nav.Spacing) {
                 if (!isNaN(val)) {
                     result.push(parseInt(val, 10));
                 }
             } return result; }();
-            for (let index129 = 0; index129 < array130.length; index129++) {
-                let s = array130[index129];
+            for (let index145 = 0; index145 < array146.length; index145++) {
+                let s = array146[index145];
                 {
                     if (Nav.Spacing["_$wrappers"][s].getValue() !== Nav.Spacing["_$wrappers"][Nav.Spacing.NONE].getValue()) {
                         if (Nav.Spacing["_$wrappers"][s].getValue() !== Nav.Spacing["_$wrappers"][spacing].getValue() && this.hasClass(Nav.Spacing["_$wrappers"][s].getValue())) {
@@ -676,13 +891,13 @@ class Progress extends JSContainer {
     setContext(context) {
         this.context = context;
         {
-            let array132 = function () { let result = []; for (let val in Constants.Context) {
+            let array148 = function () { let result = []; for (let val in Constants.Context) {
                 if (!isNaN(val)) {
                     result.push(parseInt(val, 10));
                 }
             } return result; }();
-            for (let index131 = 0; index131 < array132.length; index131++) {
-                let ct = array132[index131];
+            for (let index147 = 0; index147 < array148.length; index147++) {
+                let ct = array148[index147];
                 {
                     this.bar.removeClass("bg-" + Constants.Context["_$wrappers"][ct].getValue());
                 }
@@ -722,6 +937,12 @@ class Progress extends JSContainer {
 }
 Progress["__class"] = "framework.components.boostrap.Progress";
 Progress["__interfaces"] = ["framework.components.api.Renderable"];
+/**
+ * Bootstrap Alert implementation
+ * @param {string} name
+ * @class
+ * @extends BaseBootstrap
+ */
 class Alert extends BaseBootstrap {
     constructor(name) {
         super(name, "div");
@@ -922,4 +1143,52 @@ class Button extends BaseBootstrap {
 }
 Button["__class"] = "framework.components.boostrap.Button";
 Button["__interfaces"] = ["framework.components.api.Renderable"];
+class ListGroupItem extends BaseBootstrap {
+    constructor(name, tag) {
+        super(name, tag);
+    }
+    /**
+     *
+     * @return {string}
+     */
+    getBoostrapName() {
+        return "list-group-item";
+    }
+    setActive(b) {
+        if (b && !this.hasClass("active")) {
+            this.addClass("active");
+        }
+        else if (!b && this.hasClass("active")) {
+            this.removeClass("active");
+        }
+    }
+    isActive() {
+        return this.hasClass("active");
+    }
+    setDisabled(b) {
+        if (b && !this.hasClass("disabled")) {
+            this.addClass("disabled");
+        }
+        else if (!b && this.hasClass("disabled")) {
+            this.removeClass("disabled");
+        }
+        this.setAttribute("aria-disabled", b ? "true" : "false");
+    }
+    isDisabled() {
+        return this.hasClass("disabled");
+    }
+    setActionable(b) {
+        if (b && !this.hasClass("list-group-item-action")) {
+            this.addClass("list-group-item-action");
+        }
+        else if (!b && this.hasClass("list-group-item-action")) {
+            this.removeClass("list-group-item-action");
+        }
+    }
+    isActionable() {
+        return this.hasClass("list-group-item-action");
+    }
+}
+ListGroupItem["__class"] = "framework.components.boostrap.ListGroupItem";
+ListGroupItem["__interfaces"] = ["framework.components.api.Renderable"];
 Boot.main(null);
