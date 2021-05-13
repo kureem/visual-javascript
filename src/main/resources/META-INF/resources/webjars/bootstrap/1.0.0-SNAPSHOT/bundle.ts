@@ -1,17 +1,17 @@
-/* Generated from Java with JSweet 2.3.0 - http://www.jsweet.org */
+/* Generated from Java with JSweet 3.0.0 - http://www.jsweet.org */
 abstract class BaseBootstrap extends JSContainer {
-    /*private*/ context : Constants.Context;
+    /*private*/ context: Constants.Context;
 
-    public constructor(name : string, tag : string) {
+    public constructor(name: string, tag: string) {
         super(name, tag);
-        if(this.context===undefined) this.context = null;
+        if (this.context === undefined) { this.context = null; }
         this.addClass(this.getBoostrapName());
     }
 
-    public setContext(context : Constants.Context) : BaseBootstrap {
+    public setContext(context: Constants.Context): BaseBootstrap {
         this.context = context;
         this.clearContexts();
-        if(context != null) this.addClass(this.getBoostrapName() + "-" + Constants.Context["_$wrappers"][context].getValue());
+        if (context != null)this.addClass(this.getBoostrapName() + "-" + Constants.Context["_$wrappers"][context].getValue());
         return this;
     }
 
@@ -19,9 +19,9 @@ abstract class BaseBootstrap extends JSContainer {
         this.setContext(this.context);
     }
 
-    clearContexts() : BaseBootstrap {
+    clearContexts(): BaseBootstrap {
         {
-            let array136 = /* Enum.values */function() { let result: number[] = []; for(let val in Constants.Context) { if(!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
+            let array136 = /* Enum.values */function() { let result: Constants.Context[] = []; for(let val in Constants.Context) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
             for(let index135=0; index135 < array136.length; index135++) {
                 let context = array136[index135];
                 {
@@ -32,56 +32,46 @@ abstract class BaseBootstrap extends JSContainer {
         return this;
     }
 
-    public getContext() : Constants.Context {
+    public getContext(): Constants.Context {
         return this.context;
     }
 
-    public abstract getBoostrapName() : string;
+    public abstract getBoostrapName(): string;
 }
 BaseBootstrap["__class"] = "framework.components.boostrap.BaseBootstrap";
 BaseBootstrap["__interfaces"] = ["framework.components.api.Renderable"];
 
 
 
-class Boot {
-    public static main(args : string[]) {
-        let nav : Nav = new Nav("test", "ul");
-        nav.setJustifyContent(Constants.JustifyContent.AROUND);
-        nav.render();
-    }
-}
-Boot["__class"] = "framework.components.boostrap.Boot";
-
-
 class Breadcrumb extends JSContainer {
-    public constructor(name : string) {
+    public constructor(name: string) {
         super(name, "ol");
         this.addClass("breadcrumb");
     }
 
-    public addItem(name : string, label : string) : Breadcrumb.BreadcrumbItem {
-        let item : Breadcrumb.BreadcrumbItem = new Breadcrumb.BreadcrumbItem(name, label);
+    public addItem(name: string, label: string): Breadcrumb.BreadcrumbItem {
+        const item: Breadcrumb.BreadcrumbItem = new Breadcrumb.BreadcrumbItem(name, label);
         this.addChild(item);
         return item;
     }
 
-    public activate(name : string) {
+    public activate(name: string) {
         {
             let array138 = this.getChildren();
             for(let index137=0; index137 < array138.length; index137++) {
                 let r = array138[index137];
                 {
-                    let item : Breadcrumb.BreadcrumbItem = <Breadcrumb.BreadcrumbItem><any>r;
-                    if(item.getName() === name) {
-                        if(!item.isActive()) {
+                    const item: Breadcrumb.BreadcrumbItem = <Breadcrumb.BreadcrumbItem><any>r;
+                    if (item.getName() === name){
+                        if (!item.isActive()){
                             item.setActive(true);
-                            let evt : CustomEvent = new CustomEvent("activate");
+                            const evt: CustomEvent = new CustomEvent("activate");
                             evt["item"] = item;
                             evt["source"] = this;
                             this.fireListener("activate", evt);
                         }
                     } else {
-                        if(item.isActive()) {
+                        if (item.isActive()){
                             item.setActive(false);
                         }
                     }
@@ -98,41 +88,42 @@ Breadcrumb["__interfaces"] = ["framework.components.api.Renderable"];
 namespace Breadcrumb {
 
     export class BreadcrumbItem extends JSContainer {
-        label_ : string;
+        label_: string;
 
-        active : boolean = false;
+        active: boolean;
 
-        public constructor(name : string, label : string) {
+        public constructor(name: string, label: string) {
             super(name, "li");
-            if(this.label_===undefined) this.label_ = null;
+            if (this.label_ === undefined) { this.label_ = null; }
+            this.active = false;
             this.addClass("breadcrumb-item");
             this.setLabel(label);
             this.addEventListener(new BreadcrumbItem.BreadcrumbItem$0(this), "click");
         }
 
-        public setLabel(label : string) {
+        public setLabel(label: string) {
             this.label_ = label;
             this.refresh();
         }
 
-        public setActive(b : boolean) {
+        public setActive(b: boolean) {
             this.active = b;
             this.refresh();
         }
 
         public refresh() {
-            if(this.active) {
-                if(this.hasClass("active")) this.removeClass("active");
+            if (this.active){
+                if (this.hasClass("active"))this.removeClass("active");
                 this.setHtml("<a href=\"#\">" + this.label_ + "</a>");
             } else {
                 this.setHtml(this.label_);
-                if(!this.hasClass("active")) {
+                if (!this.hasClass("active")){
                     this.addClass("active");
                 }
             }
         }
 
-        public isActive() : boolean {
+        public isActive(): boolean {
             return this.active;
         }
     }
@@ -150,7 +141,7 @@ namespace Breadcrumb {
              * @param {*} source
              * @param {Event} evt
              */
-            public performAction(source : api.Renderable, evt : Event) {
+            public performAction(source: api.Renderable, evt: Event) {
                 (<Breadcrumb><any>source.getParent()).activate(source.getName());
             }
 
@@ -166,55 +157,65 @@ namespace Breadcrumb {
 }
 
 
+class Broot {
+    public static main(args: string[]) {
+        const app: MyApp = new MyApp("sdfs");
+        app.render();
+    }
+}
+Broot["__class"] = "framework.components.boostrap.Broot";
+
+
 class ButtonGroup extends JSContainer {
-    public static SIZE_LARGE : string = "lg";
+    public static SIZE_LARGE: string = "lg";
 
-    public static SIZE_SMALL : string = "sm";
+    public static SIZE_SMALL: string = "sm";
 
-    public static SIZE_NORMAL : string = "";
+    public static SIZE_NORMAL: string = "";
 
-    /*private*/ vertical : boolean = false;
+    /*private*/ vertical: boolean;
 
-    public constructor(name : string) {
+    public constructor(name: string) {
         super(name, "div");
+        this.vertical = false;
         this.addClass("btn-group");
     }
 
-    public isVertical() : boolean {
+    public isVertical(): boolean {
         return this.vertical;
     }
 
-    public setVertical(vertical : boolean) {
-        if(vertical && !this.hasClass("btn-group-vertical")) {
+    public setVertical(vertical: boolean) {
+        if (vertical && !this.hasClass("btn-group-vertical")){
             this.addClass("btn-group-vertical");
-            if(this.hasClass("btn-group")) {
+            if (this.hasClass("btn-group")){
                 this.removeClass("btn-group");
             }
         } else {
             this.removeClass("btn-group-vertical");
-            if(!this.hasClass("btn-group")) {
+            if (!this.hasClass("btn-group")){
                 this.addClass("btn-group");
             }
         }
         this.vertical = vertical;
     }
 
-    public setSize(size : string) : ButtonGroup {
-        if(size === "sm") {
-            if(this.hasClass("btn-group-lg")) {
+    public setSize(size: string): ButtonGroup {
+        if (size === "sm"){
+            if (this.hasClass("btn-group-lg")){
                 this.removeClass("btn-group-lg");
             }
             this.addClass("btn-group-sm");
-        } else if(size === "lg") {
-            if(this.hasClass("btn-group-sm")) {
+        } else if (size === "lg"){
+            if (this.hasClass("btn-group-sm")){
                 this.removeClass("btn-group-sm");
             }
             this.addClass("btn-group-lg");
         } else {
-            if(this.hasClass("btn-group-sm")) {
+            if (this.hasClass("btn-group-sm")){
                 this.removeClass("btn-group-sm");
             }
-            if(this.hasClass("btn-group-lg")) {
+            if (this.hasClass("btn-group-lg")){
                 this.removeClass("btn-group-lg");
             }
         }
@@ -227,33 +228,36 @@ ButtonGroup["__interfaces"] = ["framework.components.api.Renderable"];
 
 
 class Card extends JSContainer {
-    /*private*/ header : JSContainer = new JSContainer("head", "div");
+    /*private*/ header: JSContainer;
 
-    /*private*/ content : JSContainer = new JSContainer("content", "div");
+    /*private*/ content: JSContainer;
 
-    /*private*/ footer : JSContainer = new JSContainer("footer", "div");
+    /*private*/ footer: JSContainer;
 
-    public constructor(name : string) {
+    public constructor(name: string) {
         super(name, "div");
+        this.header = new JSContainer("head", "div");
+        this.content = new JSContainer("content", "div");
+        this.footer = new JSContainer("footer", "div");
         this.addClass("card");
         this.addChild(this.header);
         this.addChild(this.content);
         this.addChild(this.footer);
     }
 
-    public getUIHeader() : JSContainer {
+    public getUIHeader(): JSContainer {
         return this.header;
     }
 
-    public getUIContent() : JSContainer {
+    public getUIContent(): JSContainer {
         return this.content;
     }
 
-    public getUIFooter() : JSContainer {
+    public getUIFooter(): JSContainer {
         return this.footer;
     }
 
-    public addHeaderImage(img : JSContainer) : Card {
+    public addHeaderImage(img: JSContainer): Card {
         this.header.addChild(img);
         img.addClass("card-img-top");
         return this;
@@ -265,16 +269,20 @@ Card["__interfaces"] = ["framework.components.api.Renderable"];
 
 
 class CardBody extends JSContainer {
-    /*private*/ title : JSContainer = new JSContainer("title", "h5").addClass("card-title");
+    /*private*/ title: JSContainer;
 
-    /*private*/ subtitle : JSContainer = new JSContainer("subtitle", "h6").addClass("card-subtitle mb-2 text-muted");
+    /*private*/ subtitle: JSContainer;
 
-    /*private*/ text : JSContainer = new JSContainer("text", "p").addClass("card-text");
+    /*private*/ text: JSContainer;
 
-    /*private*/ foot : JSContainer = new JSContainer("foot", "div").addClass("card-foot");
+    /*private*/ foot: JSContainer;
 
-    public constructor(name : string) {
+    public constructor(name: string) {
         super(name, "div");
+        this.title = new JSContainer("title", "h5").addClass("card-title");
+        this.subtitle = new JSContainer("subtitle", "h6").addClass("card-subtitle mb-2 text-muted");
+        this.text = new JSContainer("text", "p").addClass("card-text");
+        this.foot = new JSContainer("foot", "div").addClass("card-foot");
         this.addClass("card-body");
         this.addChild(this.title);
         this.addChild(this.subtitle);
@@ -282,38 +290,38 @@ class CardBody extends JSContainer {
         this.addChild(this.foot);
     }
 
-    public setTitle(title : string) : CardBody {
+    public setTitle(title: string): CardBody {
         this.title.setHtml(title);
         return this;
     }
 
-    public setSubtitle(subtitle : string) : CardBody {
+    public setSubtitle(subtitle: string): CardBody {
         this.subtitle.setHtml(subtitle);
         return this;
     }
 
-    public setText(txt : string) : CardBody {
+    public setText(txt: string): CardBody {
         this.text.setHtml(txt);
         return this;
     }
 
-    public getUITitle() : JSContainer {
+    public getUITitle(): JSContainer {
         return this.title;
     }
 
-    public getUISubtitle() : JSContainer {
+    public getUISubtitle(): JSContainer {
         return this.subtitle;
     }
 
-    public getUIText() : JSContainer {
+    public getUIText(): JSContainer {
         return this.text;
     }
 
-    public getUIFoot() : JSContainer {
+    public getUIFoot(): JSContainer {
         return this.foot;
     }
 
-    public addCardLink(link : JSContainer) : CardBody {
+    public addCardLink(link: JSContainer): CardBody {
         link.addClass("card-link");
         this.foot.addChild(link);
         return this;
@@ -325,7 +333,7 @@ CardBody["__interfaces"] = ["framework.components.api.Renderable"];
 
 
 class CardFooter extends JSContainer {
-    public constructor(name : string) {
+    public constructor(name: string) {
         super(name, "div");
         this.addClass("card-footer text-muted");
     }
@@ -336,7 +344,7 @@ CardFooter["__interfaces"] = ["framework.components.api.Renderable"];
 
 
 class CardHeader extends JSContainer {
-    public constructor(name : string) {
+    public constructor(name: string) {
         super(name, "div");
         this.addClass("card-header");
     }
@@ -347,14 +355,17 @@ CardHeader["__interfaces"] = ["framework.components.api.Renderable"];
 
 
 class Carousel extends JSContainer {
-    /*private*/ inner : JSContainer = new JSContainer("inner", "div").addClass("carousel-inner");
+    /*private*/ inner: JSContainer;
 
-    /*private*/ controlPrev : JSContainer = new JSContainer("control-prev", "a");
+    /*private*/ controlPrev: JSContainer;
 
-    /*private*/ controlNext : JSContainer = new JSContainer("control-next", "a");
+    /*private*/ controlNext: JSContainer;
 
-    public constructor(name : string) {
+    public constructor(name: string) {
         super(name, "div");
+        this.inner = new JSContainer("inner", "div").addClass("carousel-inner");
+        this.controlPrev = new JSContainer("control-prev", "a");
+        this.controlNext = new JSContainer("control-next", "a");
         this.addClass("carousel");
         this.addClass("slide");
         this.addChild(this.inner);
@@ -364,70 +375,70 @@ class Carousel extends JSContainer {
         this.decoratecontrol(this.controlNext, "next");
     }
 
-    /*private*/ decoratecontrol(control : JSContainer, dir : string) {
+    /*private*/ decoratecontrol(control: JSContainer, dir: string) {
         control.addClass("carousel-control-" + dir);
         control.setAttribute("href", "#" + this.getId()).setAttribute("role", "button").setAttribute("data-slide", dir);
         control.addChild(new JSContainer("span").addClass("carousel-control-" + dir + "-icon").setAttribute("aria-hidden", "true"));
         control.addChild(new JSContainer("span").addClass("sr-only").setHtml(dir));
     }
 
-    public setShowControls(b : boolean) {
-        this.controlPrev.setStyle("display", b?null:"none");
-        this.controlNext.setStyle("display", b?null:"none");
+    public setShowControls(b: boolean) {
+        this.controlPrev.setStyle("display", b ? null : "none");
+        this.controlNext.setStyle("display", b ? null : "none");
     }
 
-    public isShowControls() : boolean {
+    public isShowControls(): boolean {
         return this.controlPrev.getStyle("display") !== "none";
     }
 
-    public setCrossFade(b : boolean) {
-        if(b && !this.hasClass("carousel-fade")) {
+    public setCrossFade(b: boolean) {
+        if (b && !this.hasClass("carousel-fade")){
             this.addClass("carousel-fade");
         } else {
-            if(this.hasClass("carousel-fade")) {
+            if (this.hasClass("carousel-fade")){
                 this.removeClass("carousel-fade");
             }
         }
     }
 
-    public isCrossFade() : boolean {
+    public isCrossFade(): boolean {
         return this.hasClass("carousel-fade");
     }
 
-    public addItem(item : CarouselItem) {
+    public addItem(item: CarouselItem) {
         this.inner.addChild(item);
     }
 
-    public setInterval(interval : number) {
+    public setInterval(interval: number) {
         this.setAttribute("data-interval", interval.toString());
     }
 
-    public setKeyboard(b : boolean) {
-        this.setAttribute("keyboard", b?"true":"false");
+    public setKeyboard(b: boolean) {
+        this.setAttribute("keyboard", b ? "true" : "false");
     }
 
-    public setPauseOnHover(b : boolean) {
-        if(b) {
+    public setPauseOnHover(b: boolean) {
+        if (b){
             this.setAttribute("data-pause", "hover");
         } else {
             this.setAttribute("data-pause", null);
         }
     }
 
-    public setRideCarousel(b : boolean) {
-        if(b) {
+    public setRideCarousel(b: boolean) {
+        if (b){
             this.setAttribute("data-ride", "carousel");
         } else {
             this.setAttribute("data-ride", null);
         }
     }
 
-    public setWrap(b : boolean) {
-        this.setAttribute("wrap", b?"true":"false");
+    public setWrap(b: boolean) {
+        this.setAttribute("wrap", b ? "true" : "false");
     }
 
-    public setTouch(b : boolean) {
-        this.setAttribute("touch", b?"true":"false");
+    public setTouch(b: boolean) {
+        this.setAttribute("touch", b ? "true" : "false");
     }
 
     public cycle() {
@@ -450,9 +461,9 @@ class Carousel extends JSContainer {
         this.invoke("dispose");
     }
 
-    /*private*/ invoke(method : string) {
-        let el : HTMLElement = this.getNative();
-        let fn : Function = <Function>el["carousel"];
+    /*private*/ invoke(method: string) {
+        const el: HTMLElement = this.getNative();
+        const fn: Function = <Function>el["carousel"];
         fn.call(el, method);
     }
 }
@@ -462,41 +473,45 @@ Carousel["__interfaces"] = ["framework.components.api.Renderable"];
 
 
 class CarouselItem extends JSContainer {
-    /*private*/ img : JSContainer = new JSContainer("img", "img").addClass("d-block w-100");
+    /*private*/ img: JSContainer;
 
-    /*private*/ caption : JSContainer = new JSContainer("caption", "div").addClass("carousel-caption d-none d-md-block");
+    /*private*/ caption: JSContainer;
 
-    /*private*/ title : JSContainer = new JSContainer("title", "h5");
+    /*private*/ title: JSContainer;
 
-    /*private*/ subtitle : JSContainer = new JSContainer("subtitle", "p");
+    /*private*/ subtitle: JSContainer;
 
-    public constructor(name : string) {
+    public constructor(name: string) {
         super(name, "div");
+        this.img = new JSContainer("img", "img").addClass("d-block w-100");
+        this.caption = new JSContainer("caption", "div").addClass("carousel-caption d-none d-md-block");
+        this.title = new JSContainer("title", "h5");
+        this.subtitle = new JSContainer("subtitle", "p");
         this.addChild(this.img);
         this.addChild(this.caption);
         this.caption.addChild(this.title).addChild(this.subtitle);
         this.caption.setStyle("display", "none");
     }
 
-    public setShowCaption(b : boolean) {
-        this.caption.setStyle("display", b?null:"none");
+    public setShowCaption(b: boolean) {
+        this.caption.setStyle("display", b ? null : "none");
     }
 
-    public isShowCaption() : boolean {
+    public isShowCaption(): boolean {
         return this.caption.getStyle("display") !== "none";
     }
 
-    public setTitle(str : string) {
+    public setTitle(str: string) {
         this.title.setHtml(str);
         this.setShowCaption(true);
     }
 
-    public setSubtitle(str : string) {
+    public setSubtitle(str: string) {
         this.subtitle.setHtml(str);
         this.setShowCaption(true);
     }
 
-    public setInterval(interval : number) {
+    public setInterval(interval: number) {
         this.setAttribute("data-interval", interval.toString());
     }
 }
@@ -519,21 +534,22 @@ namespace Constants {
     export class Context_$WRAPPER {
         value;
 
-        constructor(protected _$ordinal : number, protected _$name : string, value) {
-            if(this.value===undefined) this.value = null;
+        constructor(protected _$ordinal: number, protected _$name: string, value) {
+            if (this.value === undefined) { this.value = null; }
             this.value = value;
         }
 
-        public getValue() : string {
+        public getValue(): string {
             return this.value;
         }
-        public name() : string { return this._$name; }
-        public ordinal() : number { return this._$ordinal; }
+        public name(): string { return this._$name; }
+        public ordinal(): number { return this._$ordinal; }
+        public compareTo(other: any): number { return this._$ordinal - (isNaN(other)?other._$ordinal:other); }
     }
     Context["__class"] = "framework.components.boostrap.Constants.Context";
-    Context["__interfaces"] = ["java.lang.Comparable","java.io.Serializable"];
+    Context["__interfaces"] = ["java.lang.constant.Constable","java.lang.Comparable","java.io.Serializable"];
 
-    Context["_$wrappers"] = [new Context_$WRAPPER(0, "PRIMARY", "primary"), new Context_$WRAPPER(1, "SECONDARY", "secondary"), new Context_$WRAPPER(2, "SUCCESS", "success"), new Context_$WRAPPER(3, "DANGER", "danger"), new Context_$WRAPPER(4, "WARNING", "warning"), new Context_$WRAPPER(5, "INFO", "info"), new Context_$WRAPPER(6, "LIGHT", "light"), new Context_$WRAPPER(7, "DARK", "dark")];
+    Context["_$wrappers"] = {0: new Context_$WRAPPER(0, "PRIMARY", "primary"), 1: new Context_$WRAPPER(1, "SECONDARY", "secondary"), 2: new Context_$WRAPPER(2, "SUCCESS", "success"), 3: new Context_$WRAPPER(3, "DANGER", "danger"), 4: new Context_$WRAPPER(4, "WARNING", "warning"), 5: new Context_$WRAPPER(5, "INFO", "info"), 6: new Context_$WRAPPER(6, "LIGHT", "light"), 7: new Context_$WRAPPER(7, "DARK", "dark")};
 
 
     export enum Size {
@@ -544,21 +560,22 @@ namespace Constants {
     export class Size_$WRAPPER {
         value;
 
-        constructor(protected _$ordinal : number, protected _$name : string, value) {
-            if(this.value===undefined) this.value = null;
+        constructor(protected _$ordinal: number, protected _$name: string, value) {
+            if (this.value === undefined) { this.value = null; }
             this.value = value;
         }
 
-        public getValue() : string {
+        public getValue(): string {
             return this.value;
         }
-        public name() : string { return this._$name; }
-        public ordinal() : number { return this._$ordinal; }
+        public name(): string { return this._$name; }
+        public ordinal(): number { return this._$ordinal; }
+        public compareTo(other: any): number { return this._$ordinal - (isNaN(other)?other._$ordinal:other); }
     }
     Size["__class"] = "framework.components.boostrap.Constants.Size";
-    Size["__interfaces"] = ["java.lang.Comparable","java.io.Serializable"];
+    Size["__interfaces"] = ["java.lang.constant.Constable","java.lang.Comparable","java.io.Serializable"];
 
-    Size["_$wrappers"] = [new Size_$WRAPPER(0, "SMALL", "sm"), new Size_$WRAPPER(1, "LARGE", "lg"), new Size_$WRAPPER(2, "NORMAL", "")];
+    Size["_$wrappers"] = {0: new Size_$WRAPPER(0, "SMALL", "sm"), 1: new Size_$WRAPPER(1, "LARGE", "lg"), 2: new Size_$WRAPPER(2, "NORMAL", "")};
 
 
     export enum JustifyContent {
@@ -569,21 +586,22 @@ namespace Constants {
     export class JustifyContent_$WRAPPER {
         value;
 
-        constructor(protected _$ordinal : number, protected _$name : string, value) {
-            if(this.value===undefined) this.value = null;
+        constructor(protected _$ordinal: number, protected _$name: string, value) {
+            if (this.value === undefined) { this.value = null; }
             this.value = value;
         }
 
-        public getValue() : string {
+        public getValue(): string {
             return this.value;
         }
-        public name() : string { return this._$name; }
-        public ordinal() : number { return this._$ordinal; }
+        public name(): string { return this._$name; }
+        public ordinal(): number { return this._$ordinal; }
+        public compareTo(other: any): number { return this._$ordinal - (isNaN(other)?other._$ordinal:other); }
     }
     JustifyContent["__class"] = "framework.components.boostrap.Constants.JustifyContent";
-    JustifyContent["__interfaces"] = ["java.lang.Comparable","java.io.Serializable"];
+    JustifyContent["__interfaces"] = ["java.lang.constant.Constable","java.lang.Comparable","java.io.Serializable"];
 
-    JustifyContent["_$wrappers"] = [new JustifyContent_$WRAPPER(0, "START", "start"), new JustifyContent_$WRAPPER(1, "CENTER", "center"), new JustifyContent_$WRAPPER(2, "END", "end"), new JustifyContent_$WRAPPER(3, "AROUND", "around"), new JustifyContent_$WRAPPER(4, "BETWEEN", "between")];
+    JustifyContent["_$wrappers"] = {0: new JustifyContent_$WRAPPER(0, "START", "start"), 1: new JustifyContent_$WRAPPER(1, "CENTER", "center"), 2: new JustifyContent_$WRAPPER(2, "END", "end"), 3: new JustifyContent_$WRAPPER(3, "AROUND", "around"), 4: new JustifyContent_$WRAPPER(4, "BETWEEN", "between")};
 
 
     export enum ScreenSize {
@@ -594,36 +612,41 @@ namespace Constants {
     export class ScreenSize_$WRAPPER {
         value;
 
-        constructor(protected _$ordinal : number, protected _$name : string, value) {
-            if(this.value===undefined) this.value = null;
+        constructor(protected _$ordinal: number, protected _$name: string, value) {
+            if (this.value === undefined) { this.value = null; }
             this.value = value;
         }
 
-        public getValue() : string {
+        public getValue(): string {
             return this.value;
         }
-        public name() : string { return this._$name; }
-        public ordinal() : number { return this._$ordinal; }
+        public name(): string { return this._$name; }
+        public ordinal(): number { return this._$ordinal; }
+        public compareTo(other: any): number { return this._$ordinal - (isNaN(other)?other._$ordinal:other); }
     }
     ScreenSize["__class"] = "framework.components.boostrap.Constants.ScreenSize";
-    ScreenSize["__interfaces"] = ["java.lang.Comparable","java.io.Serializable"];
+    ScreenSize["__interfaces"] = ["java.lang.constant.Constable","java.lang.Comparable","java.io.Serializable"];
 
-    ScreenSize["_$wrappers"] = [new ScreenSize_$WRAPPER(0, "SMALL", "sm"), new ScreenSize_$WRAPPER(1, "MEDIUM", "md"), new ScreenSize_$WRAPPER(2, "LARGE", "lg"), new ScreenSize_$WRAPPER(3, "EXTRA_LARGE", "xl")];
+    ScreenSize["_$wrappers"] = {0: new ScreenSize_$WRAPPER(0, "SMALL", "sm"), 1: new ScreenSize_$WRAPPER(1, "MEDIUM", "md"), 2: new ScreenSize_$WRAPPER(2, "LARGE", "lg"), 3: new ScreenSize_$WRAPPER(3, "EXTRA_LARGE", "xl")};
 
 }
 
 
 class Dropdown extends JSContainer {
-    /*private*/ button : Button = new Button("button", "button");
+    /*private*/ button: Button;
 
-    /*private*/ btnSplit : Button = new Button("split", "button");
+    /*private*/ btnSplit: Button;
 
-    /*private*/ menu : DropdownMenu = new DropdownMenu("menu");
+    /*private*/ menu: DropdownMenu;
 
-    /*private*/ split : boolean = false;
+    /*private*/ split: boolean;
 
-    public constructor(name : string, tag : string) {
+    public constructor(name: string, tag: string) {
         super(name, tag);
+        this.button = new Button("button", "button");
+        this.btnSplit = new Button("split", "button");
+        this.menu = new DropdownMenu("menu");
+        this.split = false;
         this.addClass("dropdown");
         this.addChild(this.button);
         this.addChild(this.btnSplit.setStyle("display", "none"));
@@ -635,16 +658,16 @@ class Dropdown extends JSContainer {
         this.button.setAttribute("aria-haspopup", "true").setAttribute("aria-expanded", "false");
     }
 
-    public getButton() : Button {
+    public getButton(): Button {
         return this.button;
     }
 
-    public getMenu() : DropdownMenu {
+    public getMenu(): DropdownMenu {
         return this.menu;
     }
 
-    public setSplit(b : boolean) : Dropdown {
-        if(b) {
+    public setSplit(b: boolean): Dropdown {
+        if (b){
             this.btnSplit.setStyle("display", null);
         } else {
             this.btnSplit.setStyle("display", "none");
@@ -657,8 +680,8 @@ class Dropdown extends JSContainer {
      * 
      * @param {HTMLElement} parent
      */
-    public render(parent : HTMLElement) {
-        if(this.split) {
+    public render(parent: HTMLElement) {
+        if (this.split){
             this.btnSplit.setSize(this.button.getSize());
             this.btnSplit.setContext(this.button.getContext());
             this.btnSplit.setDisabled(this.button.isDisabled());
@@ -672,14 +695,14 @@ Dropdown["__interfaces"] = ["framework.components.api.Renderable"];
 
 
 class DropdownMenu extends JSContainer {
-    public constructor(name : string) {
+    public constructor(name: string) {
         super(name, "div");
         this.addClass("dropdown-menu");
         this.setAttribute("aria-labelledby", "dropdownMenuButton");
     }
 
-    public addItem(name : string, text : string) : DropdownMenu.DropdownItem {
-        let item : DropdownMenu.DropdownItem = new DropdownMenu.DropdownItem(name, text);
+    public addItem(name: string, text: string): DropdownMenu.DropdownItem {
+        const item: DropdownMenu.DropdownItem = new DropdownMenu.DropdownItem(name, text);
         this.addChild(item);
         return item;
     }
@@ -692,14 +715,14 @@ DropdownMenu["__interfaces"] = ["framework.components.api.Renderable"];
 namespace DropdownMenu {
 
     export class DropdownItem extends JSContainer {
-        public constructor(name : string, text : string) {
+        public constructor(name: string, text: string) {
             super(name, "a");
             this.setAttribute("href", "javascript:void(0)");
             this.addClass("dropdown-item");
             this.setHtml(text);
         }
 
-        public setText(text : string) : DropdownMenu.DropdownItem {
+        public setText(text: string): DropdownMenu.DropdownItem {
             this.setHtml(text);
             return this;
         }
@@ -712,39 +735,39 @@ namespace DropdownMenu {
 
 
 class ListGroup extends JSContainer {
-    public constructor(name : string, tag : string) {
+    public constructor(name: string, tag: string) {
         super(name, tag);
         this.addClass("list-group");
     }
 
-    public setFlush(b : boolean) {
-        if(b && !this.hasClass("list-group-flush")) {
+    public setFlush(b: boolean) {
+        if (b && !this.hasClass("list-group-flush")){
             this.addClass("list-group-flush");
-        } else if(!b && this.hasClass("list-group-flush")) {
+        } else if (!b && this.hasClass("list-group-flush")){
             this.removeClass("list-group-flush");
         }
     }
 
-    public isFlush() : boolean {
+    public isFlush(): boolean {
         return this.hasClass("list-group-flush");
     }
 
-    public setHorizontal$boolean(b : boolean) {
-        if(b && !this.hasClass("list-group-horizontal")) {
+    public setHorizontal$boolean(b: boolean) {
+        if (b && !this.hasClass("list-group-horizontal")){
             this.addClass("list-group-horizontal");
-        } else if(!b && this.hasClass("list-group-horizontal")) {
+        } else if (!b && this.hasClass("list-group-horizontal")){
             this.removeClass("list-group-horizontal");
         }
     }
 
-    public isHorizontal() : boolean {
+    public isHorizontal(): boolean {
         return this.hasClass("list-group-horizontal");
     }
 
     /*private*/ clearHorizontalCls() {
         this.removeClass("list-group-horizontal");
         {
-            let array140 = /* Enum.values */function() { let result: number[] = []; for(let val in Constants.ScreenSize) { if(!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
+            let array140 = /* Enum.values */function() { let result: Constants.ScreenSize[] = []; for(let val in Constants.ScreenSize) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
             for(let index139=0; index139 < array140.length; index139++) {
                 let size = array140[index139];
                 {
@@ -754,20 +777,20 @@ class ListGroup extends JSContainer {
         }
     }
 
-    public setHorizontal$framework_components_boostrap_Constants_ScreenSize(screenSize : Constants.ScreenSize) {
+    public setHorizontal$framework_components_boostrap_Constants_ScreenSize(screenSize: Constants.ScreenSize) {
         this.clearHorizontalCls();
         this.addClass("list-group-horizontal-" + Constants.ScreenSize["_$wrappers"][screenSize].getValue());
     }
 
-    public setHorizontal(screenSize? : any) : any {
-        if(((typeof screenSize === 'number') || screenSize === null)) {
+    public setHorizontal(screenSize?: any) {
+        if (((typeof screenSize === 'number') || screenSize === null)) {
             return <any>this.setHorizontal$framework_components_boostrap_Constants_ScreenSize(screenSize);
-        } else if(((typeof screenSize === 'boolean') || screenSize === null)) {
+        } else if (((typeof screenSize === 'boolean') || screenSize === null)) {
             return <any>this.setHorizontal$boolean(screenSize);
         } else throw new Error('invalid overload');
     }
 
-    public addItem(item : ListGroupItem) {
+    public addItem(item: ListGroupItem) {
         this.addChild(item);
     }
 }
@@ -776,21 +799,70 @@ ListGroup["__interfaces"] = ["framework.components.api.Renderable"];
 
 
 
+class MyApp extends JSContainer {
+    /*private*/ header: JSContainer;
+
+    public constructor(name: string) {
+        super(name, "div");
+        this.header = new JSContainer("other", "h1");
+        this.addClass("myapp");
+        this.setStyle("width", "100%").setStyle("height", "100vh");
+        const div: JSContainer = new JSContainer("root", "div");
+        div.setStyle("width", "200px");
+        div.setStyle("height", "300px");
+        div.setStyle("background-color", "red");
+        div.addEventListener(new MyApp.MyApp$0(this), "click");
+        this.header.setHtml("Hello world");
+        this.addChild(this.header);
+        this.addChild(div);
+    }
+}
+MyApp["__class"] = "framework.components.boostrap.MyApp";
+MyApp["__interfaces"] = ["framework.components.api.Renderable"];
+
+
+
+namespace MyApp {
+
+    export class MyApp$0 implements api.EventListener {
+        public __parent: any;
+        /**
+         * 
+         * @param {*} source
+         * @param {Event} evt
+         */
+        public performAction(source: api.Renderable, evt: Event) {
+            this.__parent.header.setHtml("I have been clicked");
+        }
+
+        constructor(__parent: any) {
+            this.__parent = __parent;
+        }
+    }
+    MyApp$0["__interfaces"] = ["framework.components.api.EventListener"];
+
+
+}
+
+
 class Nav extends JSContainer {
-    /*private*/ type : Nav.Type = Nav.Type.LINKS;
+    /*private*/ type: Nav.Type;
 
-    /*private*/ alignment : Nav.Alignment = Nav.Alignment.HORIZONTAL;
+    /*private*/ alignment: Nav.Alignment;
 
-    /*private*/ spacing : Nav.Spacing = Nav.Spacing.NONE;
+    /*private*/ spacing: Nav.Spacing;
 
-    public constructor(name : string, tag : string) {
+    public constructor(name: string, tag: string) {
         super(name, tag);
+        this.type = Nav.Type.LINKS;
+        this.alignment = Nav.Alignment.HORIZONTAL;
+        this.spacing = Nav.Spacing.NONE;
         this.addClass("nav");
     }
 
-    public setJustifyContent(justifyContent : Constants.JustifyContent) : Nav {
+    public setJustifyContent(justifyContent: Constants.JustifyContent): Nav {
         {
-            let array142 = /* Enum.values */function() { let result: number[] = []; for(let val in Constants.JustifyContent) { if(!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
+            let array142 = /* Enum.values */function() { let result: Constants.JustifyContent[] = []; for(let val in Constants.JustifyContent) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
             for(let index141=0; index141 < array142.length; index141++) {
                 let js = array142[index141];
                 {
@@ -802,61 +874,61 @@ class Nav extends JSContainer {
         return this;
     }
 
-    public getType() : Nav.Type {
+    public getType(): Nav.Type {
         return this.type;
     }
 
-    public setType(type : Nav.Type) {
+    public setType(type: Nav.Type) {
         this.type = type;
         {
-            let array144 = /* Enum.values */function() { let result: number[] = []; for(let val in Nav.Type) { if(!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
+            let array144 = /* Enum.values */function() { let result: Nav.Type[] = []; for(let val in Nav.Type) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
             for(let index143=0; index143 < array144.length; index143++) {
                 let t = array144[index143];
                 {
-                    if(Nav.Type["_$wrappers"][t].getValue() !== Nav.Type["_$wrappers"][type].getValue() && Nav.Type["_$wrappers"][t].getValue() !== Nav.Type["_$wrappers"][Nav.Type.LINKS].getValue()) this.removeClass(Nav.Type["_$wrappers"][t].getValue());
+                    if (Nav.Type["_$wrappers"][t].getValue() !== Nav.Type["_$wrappers"][type].getValue() && Nav.Type["_$wrappers"][t].getValue() !== Nav.Type["_$wrappers"][Nav.Type.LINKS].getValue())this.removeClass(Nav.Type["_$wrappers"][t].getValue());
                 }
             }
         }
-        if(Nav.Type["_$wrappers"][type].getValue() !== Nav.Type["_$wrappers"][Nav.Type.LINKS].getValue() && !this.hasClass(Nav.Type["_$wrappers"][type].getValue())) {
+        if (Nav.Type["_$wrappers"][type].getValue() !== Nav.Type["_$wrappers"][Nav.Type.LINKS].getValue() && !this.hasClass(Nav.Type["_$wrappers"][type].getValue())){
             this.addClass(Nav.Type["_$wrappers"][type].getValue());
         }
     }
 
-    public getAlignment() : Nav.Alignment {
+    public getAlignment(): Nav.Alignment {
         return this.alignment;
     }
 
-    public setAlignment(alignment : Nav.Alignment) {
+    public setAlignment(alignment: Nav.Alignment) {
         this.alignment = alignment;
-        if(Nav.Alignment["_$wrappers"][alignment].getValue() === Nav.Alignment["_$wrappers"][Nav.Alignment.VERTICAL].getValue() && !this.hasClass(Nav.Alignment["_$wrappers"][Nav.Alignment.VERTICAL].getValue())) {
+        if (Nav.Alignment["_$wrappers"][alignment].getValue() === Nav.Alignment["_$wrappers"][Nav.Alignment.VERTICAL].getValue() && !this.hasClass(Nav.Alignment["_$wrappers"][Nav.Alignment.VERTICAL].getValue())){
             this.addClass(Nav.Alignment["_$wrappers"][Nav.Alignment.VERTICAL].getValue());
         } else {
-            if(this.hasClass(Nav.Alignment["_$wrappers"][Nav.Alignment.VERTICAL].getValue())) {
+            if (this.hasClass(Nav.Alignment["_$wrappers"][Nav.Alignment.VERTICAL].getValue())){
                 this.removeClass(Nav.Alignment["_$wrappers"][Nav.Alignment.VERTICAL].getValue());
             }
         }
     }
 
-    public getSpacing() : Nav.Spacing {
+    public getSpacing(): Nav.Spacing {
         return this.spacing;
     }
 
-    public setSpacing(spacing : Nav.Spacing) {
+    public setSpacing(spacing: Nav.Spacing) {
         this.spacing = spacing;
         {
-            let array146 = /* Enum.values */function() { let result: number[] = []; for(let val in Nav.Spacing) { if(!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
+            let array146 = /* Enum.values */function() { let result: Nav.Spacing[] = []; for(let val in Nav.Spacing) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
             for(let index145=0; index145 < array146.length; index145++) {
                 let s = array146[index145];
                 {
-                    if(Nav.Spacing["_$wrappers"][s].getValue() !== Nav.Spacing["_$wrappers"][Nav.Spacing.NONE].getValue()) {
-                        if(Nav.Spacing["_$wrappers"][s].getValue() !== Nav.Spacing["_$wrappers"][spacing].getValue() && this.hasClass(Nav.Spacing["_$wrappers"][s].getValue())) {
+                    if (Nav.Spacing["_$wrappers"][s].getValue() !== Nav.Spacing["_$wrappers"][Nav.Spacing.NONE].getValue()){
+                        if (Nav.Spacing["_$wrappers"][s].getValue() !== Nav.Spacing["_$wrappers"][spacing].getValue() && this.hasClass(Nav.Spacing["_$wrappers"][s].getValue())){
                             this.removeClass(Nav.Spacing["_$wrappers"][s].getValue());
                         }
                     }
                 }
             }
         }
-        if(Nav.Spacing["_$wrappers"][spacing].getValue() !== Nav.Spacing["_$wrappers"][Nav.Spacing.NONE].getValue() && !this.hasClass(Nav.Spacing["_$wrappers"][spacing].getValue())) {
+        if (Nav.Spacing["_$wrappers"][spacing].getValue() !== Nav.Spacing["_$wrappers"][Nav.Spacing.NONE].getValue() && !this.hasClass(Nav.Spacing["_$wrappers"][spacing].getValue())){
             this.addClass(Nav.Spacing["_$wrappers"][spacing].getValue());
         }
     }
@@ -876,21 +948,22 @@ namespace Nav {
     export class Type_$WRAPPER {
         value;
 
-        constructor(protected _$ordinal : number, protected _$name : string, value) {
-            if(this.value===undefined) this.value = null;
+        constructor(protected _$ordinal: number, protected _$name: string, value) {
+            if (this.value === undefined) { this.value = null; }
             this.value = value;
         }
 
-        public getValue() : string {
+        public getValue(): string {
             return this.value;
         }
-        public name() : string { return this._$name; }
-        public ordinal() : number { return this._$ordinal; }
+        public name(): string { return this._$name; }
+        public ordinal(): number { return this._$ordinal; }
+        public compareTo(other: any): number { return this._$ordinal - (isNaN(other)?other._$ordinal:other); }
     }
     Type["__class"] = "framework.components.boostrap.Nav.Type";
-    Type["__interfaces"] = ["java.lang.Comparable","java.io.Serializable"];
+    Type["__interfaces"] = ["java.lang.constant.Constable","java.lang.Comparable","java.io.Serializable"];
 
-    Type["_$wrappers"] = [new Type_$WRAPPER(0, "PILLS", "nav-pills"), new Type_$WRAPPER(1, "TABS", "nav-tabs"), new Type_$WRAPPER(2, "LINKS", "nav-links")];
+    Type["_$wrappers"] = {0: new Type_$WRAPPER(0, "PILLS", "nav-pills"), 1: new Type_$WRAPPER(1, "TABS", "nav-tabs"), 2: new Type_$WRAPPER(2, "LINKS", "nav-links")};
 
 
     export enum Alignment {
@@ -901,21 +974,22 @@ namespace Nav {
     export class Alignment_$WRAPPER {
         value;
 
-        constructor(protected _$ordinal : number, protected _$name : string, value) {
-            if(this.value===undefined) this.value = null;
+        constructor(protected _$ordinal: number, protected _$name: string, value) {
+            if (this.value === undefined) { this.value = null; }
             this.value = value;
         }
 
-        public getValue() : string {
+        public getValue(): string {
             return this.value;
         }
-        public name() : string { return this._$name; }
-        public ordinal() : number { return this._$ordinal; }
+        public name(): string { return this._$name; }
+        public ordinal(): number { return this._$ordinal; }
+        public compareTo(other: any): number { return this._$ordinal - (isNaN(other)?other._$ordinal:other); }
     }
     Alignment["__class"] = "framework.components.boostrap.Nav.Alignment";
-    Alignment["__interfaces"] = ["java.lang.Comparable","java.io.Serializable"];
+    Alignment["__interfaces"] = ["java.lang.constant.Constable","java.lang.Comparable","java.io.Serializable"];
 
-    Alignment["_$wrappers"] = [new Alignment_$WRAPPER(0, "VERTICAL", "flex-column"), new Alignment_$WRAPPER(1, "HORIZONTAL", "")];
+    Alignment["_$wrappers"] = {0: new Alignment_$WRAPPER(0, "VERTICAL", "flex-column"), 1: new Alignment_$WRAPPER(1, "HORIZONTAL", "")};
 
 
     export enum Spacing {
@@ -926,27 +1000,28 @@ namespace Nav {
     export class Spacing_$WRAPPER {
         value;
 
-        constructor(protected _$ordinal : number, protected _$name : string, value) {
-            if(this.value===undefined) this.value = null;
+        constructor(protected _$ordinal: number, protected _$name: string, value) {
+            if (this.value === undefined) { this.value = null; }
             this.value = value;
         }
 
-        public getValue() : string {
+        public getValue(): string {
             return this.value;
         }
-        public name() : string { return this._$name; }
-        public ordinal() : number { return this._$ordinal; }
+        public name(): string { return this._$name; }
+        public ordinal(): number { return this._$ordinal; }
+        public compareTo(other: any): number { return this._$ordinal - (isNaN(other)?other._$ordinal:other); }
     }
     Spacing["__class"] = "framework.components.boostrap.Nav.Spacing";
-    Spacing["__interfaces"] = ["java.lang.Comparable","java.io.Serializable"];
+    Spacing["__interfaces"] = ["java.lang.constant.Constable","java.lang.Comparable","java.io.Serializable"];
 
-    Spacing["_$wrappers"] = [new Spacing_$WRAPPER(0, "FILL", "nav-fill"), new Spacing_$WRAPPER(1, "JUSTIFIED", "nav-justified"), new Spacing_$WRAPPER(2, "NONE", "")];
+    Spacing["_$wrappers"] = {0: new Spacing_$WRAPPER(0, "FILL", "nav-fill"), 1: new Spacing_$WRAPPER(1, "JUSTIFIED", "nav-justified"), 2: new Spacing_$WRAPPER(2, "NONE", "")};
 
 }
 
 
 class NavItem extends JSContainer {
-    public constructor(name : string, tag : string) {
+    public constructor(name: string, tag: string) {
         super(name, tag);
         this.addClass("nav-item");
     }
@@ -957,19 +1032,23 @@ NavItem["__interfaces"] = ["framework.components.api.Renderable"];
 
 
 class Progress extends JSContainer {
-    /*private*/ bar : JSContainer = new JSContainer("bar", "div").addClass("progress-bar");
+    /*private*/ bar: JSContainer;
 
-    /*private*/ context : Constants.Context;
+    /*private*/ context: Constants.Context;
 
-    /*private*/ min : number = 0;
+    /*private*/ min: number;
 
-    /*private*/ max : number = 100;
+    /*private*/ max: number;
 
-    /*private*/ value : number = 0;
+    /*private*/ value: number;
 
-    public constructor(name : string) {
+    public constructor(name: string) {
         super(name, "div");
-        if(this.context===undefined) this.context = null;
+        this.bar = new JSContainer("bar", "div").addClass("progress-bar");
+        if (this.context === undefined) { this.context = null; }
+        this.min = 0;
+        this.max = 100;
+        this.value = 0;
         this.addClass("progress");
         this.addChild(this.bar);
         this.bar.setAttribute("aria-valuemin", this.min.toString());
@@ -978,46 +1057,46 @@ class Progress extends JSContainer {
         this.bar.setAttribute("role", "progressbar");
     }
 
-    public getContext() : Constants.Context {
+    public getContext(): Constants.Context {
         return this.context;
     }
 
-    public setAnimated(b : boolean) {
-        if(b) {
-            if(!this.bar.hasClass("progress-bar-animated")) {
+    public setAnimated(b: boolean) {
+        if (b){
+            if (!this.bar.hasClass("progress-bar-animated")){
                 this.bar.addClass("progress-bar-animated");
             }
         } else {
-            if(this.bar.hasClass("progress-bar-animated")) {
+            if (this.bar.hasClass("progress-bar-animated")){
                 this.bar.removeClass("progress-bar-animated");
             }
         }
     }
 
-    public isAnimated() : boolean {
+    public isAnimated(): boolean {
         return this.bar.hasClass("progress-bar-animated");
     }
 
-    public setStriped(b : boolean) {
-        if(b) {
-            if(!this.bar.hasClass("progress-bar-striped")) {
+    public setStriped(b: boolean) {
+        if (b){
+            if (!this.bar.hasClass("progress-bar-striped")){
                 this.bar.addClass("progress-bar-striped");
             }
         } else {
-            if(this.bar.hasClass("progress-bar-striped")) {
+            if (this.bar.hasClass("progress-bar-striped")){
                 this.bar.removeClass("progress-bar-striped");
             }
         }
     }
 
-    public isStriped() : boolean {
+    public isStriped(): boolean {
         return this.bar.hasClass("progress-bar-striped");
     }
 
-    public setContext(context : Constants.Context) {
+    public setContext(context: Constants.Context) {
         this.context = context;
         {
-            let array148 = /* Enum.values */function() { let result: number[] = []; for(let val in Constants.Context) { if(!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
+            let array148 = /* Enum.values */function() { let result: Constants.Context[] = []; for(let val in Constants.Context) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
             for(let index147=0; index147 < array148.length; index147++) {
                 let ct = array148[index147];
                 {
@@ -1025,41 +1104,41 @@ class Progress extends JSContainer {
                 }
             }
         }
-        if(context != null) this.bar.addClass("bg-" + Constants.Context["_$wrappers"][context].getValue());
+        if (context != null)this.bar.addClass("bg-" + Constants.Context["_$wrappers"][context].getValue());
     }
 
-    public getMin() : number {
+    public getMin(): number {
         return this.min;
     }
 
-    public setMin(min : number) {
+    public setMin(min: number) {
         this.min = min;
         this.bar.setAttribute("aria-valuemin", min.toString());
     }
 
-    public getMax() : number {
+    public getMax(): number {
         return this.max;
     }
 
-    public setMax(max : number) {
+    public setMax(max: number) {
         this.max = max;
         this.bar.setAttribute("aria-valuemax", max.toString());
     }
 
-    public getValue() : number {
+    public getValue(): number {
         return this.value;
     }
 
-    public setValue(value : number) {
+    public setValue(value: number) {
         this.value = value;
         this.bar.setAttribute("aria-valuenow", value.toString());
-        let OldRange : number = this.max - this.min;
-        let NewRange : number = 100;
-        let NewValue : number = ((((value - this.min) * NewRange) / OldRange|0)) + 0;
+        const OldRange: number = this.max - this.min;
+        const NewRange: number = 100;
+        const NewValue: number = ((((value - this.min) * NewRange) / OldRange|0)) + 0;
         this.bar.setStyle("width", NewValue + "%");
     }
 
-    public getBar() : JSContainer {
+    public getBar(): JSContainer {
         return this.bar;
     }
 }
@@ -1075,16 +1154,20 @@ Progress["__interfaces"] = ["framework.components.api.Renderable"];
  * @extends BaseBootstrap
  */
 class Alert extends BaseBootstrap {
-    /*private*/ heading : JSContainer = new JSContainer("heading", "h4").addClass("alert-heading");
+    /*private*/ heading: JSContainer;
 
-    /*private*/ body : JSContainer = new JSContainer("body", "div");
+    /*private*/ body: JSContainer;
 
-    /*private*/ __close : JSContainer = new JSContainer("close", "button").setAttribute("type", "button").addClass("close").setAttribute("data-dismiss", "alert").setAttribute("aria-label", "close");
+    /*private*/ __close: JSContainer;
 
-    /*private*/ closing : boolean = false;
+    /*private*/ closing: boolean;
 
-    public constructor(name : string) {
+    public constructor(name: string) {
         super(name, "div");
+        this.heading = new JSContainer("heading", "h4").addClass("alert-heading");
+        this.body = new JSContainer("body", "div");
+        this.__close = new JSContainer("close", "button").setAttribute("type", "button").addClass("close").setAttribute("data-dismiss", "alert").setAttribute("aria-label", "close");
+        this.closing = false;
         this.addClass("alert");
         this.setAttribute("role", "alert");
         this.addChild(this.heading.setStyle("display", "none"));
@@ -1092,8 +1175,8 @@ class Alert extends BaseBootstrap {
         this.addChild(this.__close.setStyle("display", "none").setHtml("<span aria-hidden=\"true\">&times;</span>"));
         this.addClass("fade");
         this.getNative().addEventListener("animationend", (e) => {
-            if(this.closing) {
-                let evt : CustomEvent = new CustomEvent("closed.bs.alert");
+            if (this.closing){
+                const evt: CustomEvent = new CustomEvent("closed.bs.alert");
                 evt["source"] = this;
                 this.fireListener("closed.bs.alert", evt);
                 this.closing = false;
@@ -1105,12 +1188,12 @@ class Alert extends BaseBootstrap {
      * 
      * @return {string}
      */
-    public getBoostrapName() : string {
+    public getBoostrapName(): string {
         return "alert";
     }
 
-    public setHeading(heading : string) : Alert {
-        if(heading != null && heading.length > 0) {
+    public setHeading(heading: string): Alert {
+        if (heading != null && heading.length > 0){
             this.heading.setStyle("display", null);
             this.heading.setHtml(heading);
         } else {
@@ -1119,17 +1202,17 @@ class Alert extends BaseBootstrap {
         return this;
     }
 
-    public getHeading() : JSContainer {
+    public getHeading(): JSContainer {
         return this.heading;
     }
 
-    public getBody() : JSContainer {
+    public getBody(): JSContainer {
         return this.body;
     }
 
-    public setDismissable(b : boolean) : Alert {
-        if(b) {
-            if(!this.hasClass("alert-dismissible")) {
+    public setDismissable(b: boolean): Alert {
+        if (b){
+            if (!this.hasClass("alert-dismissible")){
                 this.addClass("alert-dismissible");
             }
             this.__close.setStyle("display", null);
@@ -1140,13 +1223,13 @@ class Alert extends BaseBootstrap {
         return this;
     }
 
-    public close(b : boolean) : Alert {
-        if(b) {
+    public close(b: boolean): Alert {
+        if (b){
             this.closing = false;
             this.addClass("show");
         } else {
             this.closing = true;
-            let evt : CustomEvent = new CustomEvent("close.bs.alert");
+            const evt: CustomEvent = new CustomEvent("close.bs.alert");
             evt["source"] = this;
             this.fireListener("close.bs.alert", evt);
             this.closing = true;
@@ -1161,7 +1244,7 @@ Alert["__interfaces"] = ["framework.components.api.Renderable"];
 
 
 class Badge extends BaseBootstrap {
-    public constructor(name : string, tag : string) {
+    public constructor(name: string, tag: string) {
         super(name, tag);
     }
 
@@ -1169,12 +1252,12 @@ class Badge extends BaseBootstrap {
      * 
      * @return {string}
      */
-    public getBoostrapName() : string {
+    public getBoostrapName(): string {
         return "badge";
     }
 
-    public setPill(b : boolean) : Badge {
-        if(!b && this.hasClass("badge-pill")) {
+    public setPill(b: boolean): Badge {
+        if (!b && this.hasClass("badge-pill")){
             this.removeClass("badge-pill");
         } else {
             this.addClass("badge-pill");
@@ -1188,17 +1271,21 @@ Badge["__interfaces"] = ["framework.components.api.Renderable"];
 
 
 class Button extends BaseBootstrap {
-    /*private*/ outline : boolean = false;
+    /*private*/ outline: boolean;
 
-    /*private*/ disabled : boolean = false;
+    /*private*/ disabled: boolean;
 
-    /*private*/ block : boolean = false;
+    /*private*/ block: boolean;
 
-    /*private*/ size : Constants.Size = Constants.Size.NORMAL;
+    /*private*/ size: Constants.Size;
 
-    public constructor(name : string, tag : string) {
+    public constructor(name: string, tag: string) {
         super(name, tag);
-        if(/* equalsIgnoreCase */((o1, o2) => o1.toUpperCase() === (o2===null?o2:o2.toUpperCase()))(tag, "a")) {
+        this.outline = false;
+        this.disabled = false;
+        this.block = false;
+        this.size = Constants.Size.NORMAL;
+        if (/* equalsIgnoreCase */((o1, o2) => o1.toUpperCase() === (o2===null ? o2 : o2.toUpperCase()))(tag, "a")){
             this.setAttribute("role", "button");
             this.setAttribute("href", "javascript:void(0);");
         }
@@ -1208,68 +1295,68 @@ class Button extends BaseBootstrap {
      * 
      * @return {string}
      */
-    public getBoostrapName() : string {
-        if(this.outline) {
+    public getBoostrapName(): string {
+        if (this.outline){
             return "btn-outline";
         } else {
             return "btn";
         }
     }
 
-    public isOutline() : boolean {
+    public isOutline(): boolean {
         return this.outline;
     }
 
-    public setOutline(outline : boolean) {
+    public setOutline(outline: boolean) {
         this.outline = outline;
         this.refresh();
     }
 
-    public setSize(size : Constants.Size) : Button {
+    public setSize(size: Constants.Size): Button {
         this.size = size;
-        if(Constants.Size["_$wrappers"][size].getValue() === "sm") {
-            if(this.hasClass("btn-lg")) {
+        if (Constants.Size["_$wrappers"][size].getValue() === "sm"){
+            if (this.hasClass("btn-lg")){
                 this.removeClass("btn-lg");
             }
             this.addClass("btn-sm");
-        } else if(Constants.Size["_$wrappers"][size].getValue() === "lg") {
-            if(this.hasClass("btn-sm")) {
+        } else if (Constants.Size["_$wrappers"][size].getValue() === "lg"){
+            if (this.hasClass("btn-sm")){
                 this.removeClass("btn-sm");
             }
             this.addClass("btn-lg");
         } else {
-            if(this.hasClass("btn-sm")) {
+            if (this.hasClass("btn-sm")){
                 this.removeClass("btn-sm");
             }
-            if(this.hasClass("btn-lg")) {
+            if (this.hasClass("btn-lg")){
                 this.removeClass("btn-lg");
             }
         }
         return this;
     }
 
-    public getSize() : Constants.Size {
+    public getSize(): Constants.Size {
         return this.size;
     }
 
-    public isDisabled() : boolean {
+    public isDisabled(): boolean {
         return this.disabled;
     }
 
-    public setDisabled(disabled : boolean) {
+    public setDisabled(disabled: boolean) {
         this.disabled = disabled;
-        if(disabled) {
-            if(/* equalsIgnoreCase */((o1, o2) => o1.toUpperCase() === (o2===null?o2:o2.toUpperCase()))(this.getTag(), "a")) {
+        if (disabled){
+            if (/* equalsIgnoreCase */((o1, o2) => o1.toUpperCase() === (o2===null ? o2 : o2.toUpperCase()))(this.getTag(), "a")){
                 this.setAttribute("aria-disabled", "true");
-                if(!this.hasClass("disabled")) this.addClass("disabled");
+                if (!this.hasClass("disabled"))this.addClass("disabled");
                 this.setAttribute("tabindex", "-1");
             } else {
                 this.setAttribute("disabled", "true");
             }
         } else {
-            if(/* equalsIgnoreCase */((o1, o2) => o1.toUpperCase() === (o2===null?o2:o2.toUpperCase()))(this.getTag(), "a")) {
+            if (/* equalsIgnoreCase */((o1, o2) => o1.toUpperCase() === (o2===null ? o2 : o2.toUpperCase()))(this.getTag(), "a")){
                 this.setAttribute("aria-disabled", null);
-                if(this.hasClass("disabled")) this.removeClass("disabled");
+                if (this.hasClass("disabled"))this.removeClass("disabled");
                 this.setAttribute("tabindex", null);
             } else {
                 this.setAttribute("disabled", null);
@@ -1277,13 +1364,13 @@ class Button extends BaseBootstrap {
         }
     }
 
-    public isBlock() : boolean {
+    public isBlock(): boolean {
         return this.block;
     }
 
-    public setBlock(block : boolean) {
+    public setBlock(block: boolean) {
         this.block = block;
-        if(block && !this.hasClass("btn-block")) {
+        if (block && !this.hasClass("btn-block")){
             this.addClass("btn-block");
         } else {
             this.removeClass("btn-block");
@@ -1296,7 +1383,7 @@ Button["__interfaces"] = ["framework.components.api.Renderable"];
 
 
 class ListGroupItem extends BaseBootstrap {
-    public constructor(name : string, tag : string) {
+    public constructor(name: string, tag: string) {
         super(name, tag);
     }
 
@@ -1304,44 +1391,44 @@ class ListGroupItem extends BaseBootstrap {
      * 
      * @return {string}
      */
-    public getBoostrapName() : string {
+    public getBoostrapName(): string {
         return "list-group-item";
     }
 
-    public setActive(b : boolean) {
-        if(b && !this.hasClass("active")) {
+    public setActive(b: boolean) {
+        if (b && !this.hasClass("active")){
             this.addClass("active");
-        } else if(!b && this.hasClass("active")) {
+        } else if (!b && this.hasClass("active")){
             this.removeClass("active");
         }
     }
 
-    public isActive() : boolean {
+    public isActive(): boolean {
         return this.hasClass("active");
     }
 
-    public setDisabled(b : boolean) {
-        if(b && !this.hasClass("disabled")) {
+    public setDisabled(b: boolean) {
+        if (b && !this.hasClass("disabled")){
             this.addClass("disabled");
-        } else if(!b && this.hasClass("disabled")) {
+        } else if (!b && this.hasClass("disabled")){
             this.removeClass("disabled");
         }
-        this.setAttribute("aria-disabled", b?"true":"false");
+        this.setAttribute("aria-disabled", b ? "true" : "false");
     }
 
-    public isDisabled() : boolean {
+    public isDisabled(): boolean {
         return this.hasClass("disabled");
     }
 
-    public setActionable(b : boolean) {
-        if(b && !this.hasClass("list-group-item-action")) {
+    public setActionable(b: boolean) {
+        if (b && !this.hasClass("list-group-item-action")){
             this.addClass("list-group-item-action");
-        } else if(!b && this.hasClass("list-group-item-action")) {
+        } else if (!b && this.hasClass("list-group-item-action")){
             this.removeClass("list-group-item-action");
         }
     }
 
-    public isActionable() : boolean {
+    public isActionable(): boolean {
         return this.hasClass("list-group-item-action");
     }
 }
@@ -1352,4 +1439,4 @@ ListGroupItem["__interfaces"] = ["framework.components.api.Renderable"];
 
 
 
-Boot.main(null);
+Broot.main(null);

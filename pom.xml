@@ -6,9 +6,12 @@
 	<artifactId>bootstrap</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<properties>
-		<jsweet.transpiler.version>2.3.0</jsweet.transpiler.version>
-		<jsweet.core.version>6.0.1</jsweet.core.version>
 		<skipJavadoc>true</skipJavadoc>
+		<jsweet.transpiler.version>3.0.0</jsweet.transpiler.version>
+		<jsweet.core.version>6.3.0</jsweet.core.version>
+		<java.version.release>11</java.version.release>
+		<java.version>1.${java.version.release}</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<repositories>
 		<repository>
@@ -44,14 +47,6 @@
 
 
 
-
-		<!-- <dependency>
-			<groupId>org.jsweet.candies.ext</groupId>
-			<artifactId>electron</artifactId>
-			<version>0.0.6-SNAPSHOT</version>
-		</dependency> -->
-
-
 		<dependency>
 			<groupId>org.vjs</groupId>
 			<artifactId>engine</artifactId>
@@ -69,12 +64,14 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
+				<version>3.8.1</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-					<encoding>UTF-8</encoding>
-					<fork>true</fork>
+					<release>${java.version.release}</release>
+					<compilerVersion>${java.version}</compilerVersion>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+					<fork>false</fork>
 				</configuration>
 			</plugin>
 
@@ -203,7 +200,7 @@
 											jsweet-maven-plugin
 										</artifactId>
 										<versionRange>
-											[1.1.0-SNAPSHOT,)
+											[1.0.0,)
 										</versionRange>
 										<goals>
 											<goal>jsweet</goal>

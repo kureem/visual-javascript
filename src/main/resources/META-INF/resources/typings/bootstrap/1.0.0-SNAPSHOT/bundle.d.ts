@@ -7,9 +7,6 @@ declare abstract class BaseBootstrap extends JSContainer {
     getContext(): Constants.Context;
     abstract getBoostrapName(): string;
 }
-declare class Boot {
-    static main(args: string[]): void;
-}
 declare class Breadcrumb extends JSContainer {
     constructor(name: string);
     addItem(name: string, label: string): Breadcrumb.BreadcrumbItem;
@@ -37,6 +34,9 @@ declare namespace Breadcrumb {
             constructor(__parent: any);
         }
     }
+}
+declare class Broot {
+    static main(args: string[]): void;
 }
 declare class ButtonGroup extends JSContainer {
     static SIZE_LARGE: string;
@@ -126,7 +126,7 @@ declare namespace Constants {
         WARNING = 4,
         INFO = 5,
         LIGHT = 6,
-        DARK = 7,
+        DARK = 7
     }
     /** @ignore */
     class Context_$WRAPPER {
@@ -137,11 +137,12 @@ declare namespace Constants {
         getValue(): string;
         name(): string;
         ordinal(): number;
+        compareTo(other: any): number;
     }
     enum Size {
         SMALL = 0,
         LARGE = 1,
-        NORMAL = 2,
+        NORMAL = 2
     }
     /** @ignore */
     class Size_$WRAPPER {
@@ -152,13 +153,14 @@ declare namespace Constants {
         getValue(): string;
         name(): string;
         ordinal(): number;
+        compareTo(other: any): number;
     }
     enum JustifyContent {
         START = 0,
         CENTER = 1,
         END = 2,
         AROUND = 3,
-        BETWEEN = 4,
+        BETWEEN = 4
     }
     /** @ignore */
     class JustifyContent_$WRAPPER {
@@ -169,12 +171,13 @@ declare namespace Constants {
         getValue(): string;
         name(): string;
         ordinal(): number;
+        compareTo(other: any): number;
     }
     enum ScreenSize {
         SMALL = 0,
         MEDIUM = 1,
         LARGE = 2,
-        EXTRA_LARGE = 3,
+        EXTRA_LARGE = 3
     }
     /** @ignore */
     class ScreenSize_$WRAPPER {
@@ -185,6 +188,7 @@ declare namespace Constants {
         getValue(): string;
         name(): string;
         ordinal(): number;
+        compareTo(other: any): number;
     }
 }
 declare class Dropdown extends JSContainer {
@@ -223,6 +227,22 @@ declare class ListGroup extends JSContainer {
     setHorizontal(screenSize?: any): any;
     addItem(item: ListGroupItem): void;
 }
+declare class MyApp extends JSContainer {
+    header: JSContainer;
+    constructor(name: string);
+}
+declare namespace MyApp {
+    class MyApp$0 implements api.EventListener {
+        __parent: any;
+        /**
+         *
+         * @param {*} source
+         * @param {Event} evt
+         */
+        performAction(source: api.Renderable, evt: Event): void;
+        constructor(__parent: any);
+    }
+}
 declare class Nav extends JSContainer {
     type: Nav.Type;
     alignment: Nav.Alignment;
@@ -240,7 +260,7 @@ declare namespace Nav {
     enum Type {
         PILLS = 0,
         TABS = 1,
-        LINKS = 2,
+        LINKS = 2
     }
     /** @ignore */
     class Type_$WRAPPER {
@@ -251,10 +271,11 @@ declare namespace Nav {
         getValue(): string;
         name(): string;
         ordinal(): number;
+        compareTo(other: any): number;
     }
     enum Alignment {
         VERTICAL = 0,
-        HORIZONTAL = 1,
+        HORIZONTAL = 1
     }
     /** @ignore */
     class Alignment_$WRAPPER {
@@ -265,11 +286,12 @@ declare namespace Nav {
         getValue(): string;
         name(): string;
         ordinal(): number;
+        compareTo(other: any): number;
     }
     enum Spacing {
         FILL = 0,
         JUSTIFIED = 1,
-        NONE = 2,
+        NONE = 2
     }
     /** @ignore */
     class Spacing_$WRAPPER {
@@ -280,6 +302,7 @@ declare namespace Nav {
         getValue(): string;
         name(): string;
         ordinal(): number;
+        compareTo(other: any): number;
     }
 }
 declare class NavItem extends JSContainer {

@@ -1,9 +1,10 @@
-/* Generated from Java with JSweet 2.3.0 - http://www.jsweet.org */
+/* Generated from Java with JSweet 3.0.0 - http://www.jsweet.org */
 class BaseBootstrap extends JSContainer {
     constructor(name, tag) {
         super(name, tag);
-        if (this.context === undefined)
+        if (this.context === undefined) {
             this.context = null;
+        }
         this.addClass(this.getBoostrapName());
     }
     setContext(context) {
@@ -18,7 +19,7 @@ class BaseBootstrap extends JSContainer {
     }
     clearContexts() {
         {
-            let array136 = function () { let result = []; for (let val in Constants.Context) {
+            let array136 = /* Enum.values */ function () { let result = []; for (let val in Constants.Context) {
                 if (!isNaN(val)) {
                     result.push(parseInt(val, 10));
                 }
@@ -38,21 +39,13 @@ class BaseBootstrap extends JSContainer {
 }
 BaseBootstrap["__class"] = "framework.components.boostrap.BaseBootstrap";
 BaseBootstrap["__interfaces"] = ["framework.components.api.Renderable"];
-class Boot {
-    static main(args) {
-        let nav = new Nav("test", "ul");
-        nav.setJustifyContent(Constants.JustifyContent.AROUND);
-        nav.render();
-    }
-}
-Boot["__class"] = "framework.components.boostrap.Boot";
 class Breadcrumb extends JSContainer {
     constructor(name) {
         super(name, "ol");
         this.addClass("breadcrumb");
     }
     addItem(name, label) {
-        let item = new Breadcrumb.BreadcrumbItem(name, label);
+        const item = new Breadcrumb.BreadcrumbItem(name, label);
         this.addChild(item);
         return item;
     }
@@ -62,11 +55,11 @@ class Breadcrumb extends JSContainer {
             for (let index137 = 0; index137 < array138.length; index137++) {
                 let r = array138[index137];
                 {
-                    let item = r;
+                    const item = r;
                     if (item.getName() === name) {
                         if (!item.isActive()) {
                             item.setActive(true);
-                            let evt = new CustomEvent("activate");
+                            const evt = new CustomEvent("activate");
                             evt["item"] = item;
                             evt["source"] = this;
                             this.fireListener("activate", evt);
@@ -88,9 +81,10 @@ Breadcrumb["__interfaces"] = ["framework.components.api.Renderable"];
     class BreadcrumbItem extends JSContainer {
         constructor(name, label) {
             super(name, "li");
-            this.active = false;
-            if (this.label_ === undefined)
+            if (this.label_ === undefined) {
                 this.label_ = null;
+            }
+            this.active = false;
             this.addClass("breadcrumb-item");
             this.setLabel(label);
             this.addEventListener(new BreadcrumbItem.BreadcrumbItem$0(this), "click");
@@ -141,10 +135,17 @@ Breadcrumb["__interfaces"] = ["framework.components.api.Renderable"];
         BreadcrumbItem$0["__interfaces"] = ["framework.components.api.EventListener"];
     })(BreadcrumbItem = Breadcrumb.BreadcrumbItem || (Breadcrumb.BreadcrumbItem = {}));
 })(Breadcrumb || (Breadcrumb = {}));
+class Broot {
+    static main(args) {
+        const app = new MyApp("sdfs");
+        app.render();
+    }
+}
+Broot["__class"] = "framework.components.boostrap.Broot";
 class ButtonGroup extends JSContainer {
     constructor(name) {
         super(name, "div");
-        /*private*/ this.vertical = false;
+        this.vertical = false;
         this.addClass("btn-group");
     }
     isVertical() {
@@ -197,9 +198,9 @@ ButtonGroup["__interfaces"] = ["framework.components.api.Renderable"];
 class Card extends JSContainer {
     constructor(name) {
         super(name, "div");
-        /*private*/ this.header = new JSContainer("head", "div");
-        /*private*/ this.content = new JSContainer("content", "div");
-        /*private*/ this.footer = new JSContainer("footer", "div");
+        this.header = new JSContainer("head", "div");
+        this.content = new JSContainer("content", "div");
+        this.footer = new JSContainer("footer", "div");
         this.addClass("card");
         this.addChild(this.header);
         this.addChild(this.content);
@@ -225,10 +226,10 @@ Card["__interfaces"] = ["framework.components.api.Renderable"];
 class CardBody extends JSContainer {
     constructor(name) {
         super(name, "div");
-        /*private*/ this.title = new JSContainer("title", "h5").addClass("card-title");
-        /*private*/ this.subtitle = new JSContainer("subtitle", "h6").addClass("card-subtitle mb-2 text-muted");
-        /*private*/ this.text = new JSContainer("text", "p").addClass("card-text");
-        /*private*/ this.foot = new JSContainer("foot", "div").addClass("card-foot");
+        this.title = new JSContainer("title", "h5").addClass("card-title");
+        this.subtitle = new JSContainer("subtitle", "h6").addClass("card-subtitle mb-2 text-muted");
+        this.text = new JSContainer("text", "p").addClass("card-text");
+        this.foot = new JSContainer("foot", "div").addClass("card-foot");
         this.addClass("card-body");
         this.addChild(this.title);
         this.addChild(this.subtitle);
@@ -286,9 +287,9 @@ CardHeader["__interfaces"] = ["framework.components.api.Renderable"];
 class Carousel extends JSContainer {
     constructor(name) {
         super(name, "div");
-        /*private*/ this.inner = new JSContainer("inner", "div").addClass("carousel-inner");
-        /*private*/ this.controlPrev = new JSContainer("control-prev", "a");
-        /*private*/ this.controlNext = new JSContainer("control-next", "a");
+        this.inner = new JSContainer("inner", "div").addClass("carousel-inner");
+        this.controlPrev = new JSContainer("control-prev", "a");
+        this.controlNext = new JSContainer("control-next", "a");
         this.addClass("carousel");
         this.addClass("slide");
         this.addChild(this.inner);
@@ -370,8 +371,8 @@ class Carousel extends JSContainer {
         this.invoke("dispose");
     }
     /*private*/ invoke(method) {
-        let el = this.getNative();
-        let fn = el["carousel"];
+        const el = this.getNative();
+        const fn = el["carousel"];
         fn.call(el, method);
     }
 }
@@ -380,10 +381,10 @@ Carousel["__interfaces"] = ["framework.components.api.Renderable"];
 class CarouselItem extends JSContainer {
     constructor(name) {
         super(name, "div");
-        /*private*/ this.img = new JSContainer("img", "img").addClass("d-block w-100");
-        /*private*/ this.caption = new JSContainer("caption", "div").addClass("carousel-caption d-none d-md-block");
-        /*private*/ this.title = new JSContainer("title", "h5");
-        /*private*/ this.subtitle = new JSContainer("subtitle", "p");
+        this.img = new JSContainer("img", "img").addClass("d-block w-100");
+        this.caption = new JSContainer("caption", "div").addClass("carousel-caption d-none d-md-block");
+        this.title = new JSContainer("title", "h5");
+        this.subtitle = new JSContainer("subtitle", "p");
         this.addChild(this.img);
         this.addChild(this.caption);
         this.caption.addChild(this.title).addChild(this.subtitle);
@@ -413,7 +414,7 @@ class Constants {
 }
 Constants["__class"] = "framework.components.boostrap.Constants";
 (function (Constants) {
-    var Context;
+    let Context;
     (function (Context) {
         Context[Context["PRIMARY"] = 0] = "PRIMARY";
         Context[Context["SECONDARY"] = 1] = "SECONDARY";
@@ -429,8 +430,9 @@ Constants["__class"] = "framework.components.boostrap.Constants";
         constructor(_$ordinal, _$name, value) {
             this._$ordinal = _$ordinal;
             this._$name = _$name;
-            if (this.value === undefined)
+            if (this.value === undefined) {
                 this.value = null;
+            }
             this.value = value;
         }
         getValue() {
@@ -438,12 +440,13 @@ Constants["__class"] = "framework.components.boostrap.Constants";
         }
         name() { return this._$name; }
         ordinal() { return this._$ordinal; }
+        compareTo(other) { return this._$ordinal - (isNaN(other) ? other._$ordinal : other); }
     }
     Constants.Context_$WRAPPER = Context_$WRAPPER;
     Context["__class"] = "framework.components.boostrap.Constants.Context";
-    Context["__interfaces"] = ["java.lang.Comparable", "java.io.Serializable"];
-    Context["_$wrappers"] = [new Context_$WRAPPER(0, "PRIMARY", "primary"), new Context_$WRAPPER(1, "SECONDARY", "secondary"), new Context_$WRAPPER(2, "SUCCESS", "success"), new Context_$WRAPPER(3, "DANGER", "danger"), new Context_$WRAPPER(4, "WARNING", "warning"), new Context_$WRAPPER(5, "INFO", "info"), new Context_$WRAPPER(6, "LIGHT", "light"), new Context_$WRAPPER(7, "DARK", "dark")];
-    var Size;
+    Context["__interfaces"] = ["java.lang.constant.Constable", "java.lang.Comparable", "java.io.Serializable"];
+    Context["_$wrappers"] = { 0: new Context_$WRAPPER(0, "PRIMARY", "primary"), 1: new Context_$WRAPPER(1, "SECONDARY", "secondary"), 2: new Context_$WRAPPER(2, "SUCCESS", "success"), 3: new Context_$WRAPPER(3, "DANGER", "danger"), 4: new Context_$WRAPPER(4, "WARNING", "warning"), 5: new Context_$WRAPPER(5, "INFO", "info"), 6: new Context_$WRAPPER(6, "LIGHT", "light"), 7: new Context_$WRAPPER(7, "DARK", "dark") };
+    let Size;
     (function (Size) {
         Size[Size["SMALL"] = 0] = "SMALL";
         Size[Size["LARGE"] = 1] = "LARGE";
@@ -454,8 +457,9 @@ Constants["__class"] = "framework.components.boostrap.Constants";
         constructor(_$ordinal, _$name, value) {
             this._$ordinal = _$ordinal;
             this._$name = _$name;
-            if (this.value === undefined)
+            if (this.value === undefined) {
                 this.value = null;
+            }
             this.value = value;
         }
         getValue() {
@@ -463,12 +467,13 @@ Constants["__class"] = "framework.components.boostrap.Constants";
         }
         name() { return this._$name; }
         ordinal() { return this._$ordinal; }
+        compareTo(other) { return this._$ordinal - (isNaN(other) ? other._$ordinal : other); }
     }
     Constants.Size_$WRAPPER = Size_$WRAPPER;
     Size["__class"] = "framework.components.boostrap.Constants.Size";
-    Size["__interfaces"] = ["java.lang.Comparable", "java.io.Serializable"];
-    Size["_$wrappers"] = [new Size_$WRAPPER(0, "SMALL", "sm"), new Size_$WRAPPER(1, "LARGE", "lg"), new Size_$WRAPPER(2, "NORMAL", "")];
-    var JustifyContent;
+    Size["__interfaces"] = ["java.lang.constant.Constable", "java.lang.Comparable", "java.io.Serializable"];
+    Size["_$wrappers"] = { 0: new Size_$WRAPPER(0, "SMALL", "sm"), 1: new Size_$WRAPPER(1, "LARGE", "lg"), 2: new Size_$WRAPPER(2, "NORMAL", "") };
+    let JustifyContent;
     (function (JustifyContent) {
         JustifyContent[JustifyContent["START"] = 0] = "START";
         JustifyContent[JustifyContent["CENTER"] = 1] = "CENTER";
@@ -481,8 +486,9 @@ Constants["__class"] = "framework.components.boostrap.Constants";
         constructor(_$ordinal, _$name, value) {
             this._$ordinal = _$ordinal;
             this._$name = _$name;
-            if (this.value === undefined)
+            if (this.value === undefined) {
                 this.value = null;
+            }
             this.value = value;
         }
         getValue() {
@@ -490,12 +496,13 @@ Constants["__class"] = "framework.components.boostrap.Constants";
         }
         name() { return this._$name; }
         ordinal() { return this._$ordinal; }
+        compareTo(other) { return this._$ordinal - (isNaN(other) ? other._$ordinal : other); }
     }
     Constants.JustifyContent_$WRAPPER = JustifyContent_$WRAPPER;
     JustifyContent["__class"] = "framework.components.boostrap.Constants.JustifyContent";
-    JustifyContent["__interfaces"] = ["java.lang.Comparable", "java.io.Serializable"];
-    JustifyContent["_$wrappers"] = [new JustifyContent_$WRAPPER(0, "START", "start"), new JustifyContent_$WRAPPER(1, "CENTER", "center"), new JustifyContent_$WRAPPER(2, "END", "end"), new JustifyContent_$WRAPPER(3, "AROUND", "around"), new JustifyContent_$WRAPPER(4, "BETWEEN", "between")];
-    var ScreenSize;
+    JustifyContent["__interfaces"] = ["java.lang.constant.Constable", "java.lang.Comparable", "java.io.Serializable"];
+    JustifyContent["_$wrappers"] = { 0: new JustifyContent_$WRAPPER(0, "START", "start"), 1: new JustifyContent_$WRAPPER(1, "CENTER", "center"), 2: new JustifyContent_$WRAPPER(2, "END", "end"), 3: new JustifyContent_$WRAPPER(3, "AROUND", "around"), 4: new JustifyContent_$WRAPPER(4, "BETWEEN", "between") };
+    let ScreenSize;
     (function (ScreenSize) {
         ScreenSize[ScreenSize["SMALL"] = 0] = "SMALL";
         ScreenSize[ScreenSize["MEDIUM"] = 1] = "MEDIUM";
@@ -507,8 +514,9 @@ Constants["__class"] = "framework.components.boostrap.Constants";
         constructor(_$ordinal, _$name, value) {
             this._$ordinal = _$ordinal;
             this._$name = _$name;
-            if (this.value === undefined)
+            if (this.value === undefined) {
                 this.value = null;
+            }
             this.value = value;
         }
         getValue() {
@@ -516,19 +524,20 @@ Constants["__class"] = "framework.components.boostrap.Constants";
         }
         name() { return this._$name; }
         ordinal() { return this._$ordinal; }
+        compareTo(other) { return this._$ordinal - (isNaN(other) ? other._$ordinal : other); }
     }
     Constants.ScreenSize_$WRAPPER = ScreenSize_$WRAPPER;
     ScreenSize["__class"] = "framework.components.boostrap.Constants.ScreenSize";
-    ScreenSize["__interfaces"] = ["java.lang.Comparable", "java.io.Serializable"];
-    ScreenSize["_$wrappers"] = [new ScreenSize_$WRAPPER(0, "SMALL", "sm"), new ScreenSize_$WRAPPER(1, "MEDIUM", "md"), new ScreenSize_$WRAPPER(2, "LARGE", "lg"), new ScreenSize_$WRAPPER(3, "EXTRA_LARGE", "xl")];
+    ScreenSize["__interfaces"] = ["java.lang.constant.Constable", "java.lang.Comparable", "java.io.Serializable"];
+    ScreenSize["_$wrappers"] = { 0: new ScreenSize_$WRAPPER(0, "SMALL", "sm"), 1: new ScreenSize_$WRAPPER(1, "MEDIUM", "md"), 2: new ScreenSize_$WRAPPER(2, "LARGE", "lg"), 3: new ScreenSize_$WRAPPER(3, "EXTRA_LARGE", "xl") };
 })(Constants || (Constants = {}));
 class Dropdown extends JSContainer {
     constructor(name, tag) {
         super(name, tag);
-        /*private*/ this.button = new Button("button", "button");
-        /*private*/ this.btnSplit = new Button("split", "button");
-        /*private*/ this.menu = new DropdownMenu("menu");
-        /*private*/ this.split = false;
+        this.button = new Button("button", "button");
+        this.btnSplit = new Button("split", "button");
+        this.menu = new DropdownMenu("menu");
+        this.split = false;
         this.addClass("dropdown");
         this.addChild(this.button);
         this.addChild(this.btnSplit.setStyle("display", "none"));
@@ -577,7 +586,7 @@ class DropdownMenu extends JSContainer {
         this.setAttribute("aria-labelledby", "dropdownMenuButton");
     }
     addItem(name, text) {
-        let item = new DropdownMenu.DropdownItem(name, text);
+        const item = new DropdownMenu.DropdownItem(name, text);
         this.addChild(item);
         return item;
     }
@@ -631,7 +640,7 @@ class ListGroup extends JSContainer {
     /*private*/ clearHorizontalCls() {
         this.removeClass("list-group-horizontal");
         {
-            let array140 = function () { let result = []; for (let val in Constants.ScreenSize) {
+            let array140 = /* Enum.values */ function () { let result = []; for (let val in Constants.ScreenSize) {
                 if (!isNaN(val)) {
                     result.push(parseInt(val, 10));
                 }
@@ -664,17 +673,52 @@ class ListGroup extends JSContainer {
 }
 ListGroup["__class"] = "framework.components.boostrap.ListGroup";
 ListGroup["__interfaces"] = ["framework.components.api.Renderable"];
+class MyApp extends JSContainer {
+    constructor(name) {
+        super(name, "div");
+        this.header = new JSContainer("other", "h1");
+        this.addClass("myapp");
+        this.setStyle("width", "100%").setStyle("height", "100vh");
+        const div = new JSContainer("root", "div");
+        div.setStyle("width", "200px");
+        div.setStyle("height", "300px");
+        div.setStyle("background-color", "red");
+        div.addEventListener(new MyApp.MyApp$0(this), "click");
+        this.header.setHtml("Hello world");
+        this.addChild(this.header);
+        this.addChild(div);
+    }
+}
+MyApp["__class"] = "framework.components.boostrap.MyApp";
+MyApp["__interfaces"] = ["framework.components.api.Renderable"];
+(function (MyApp) {
+    class MyApp$0 {
+        constructor(__parent) {
+            this.__parent = __parent;
+        }
+        /**
+         *
+         * @param {*} source
+         * @param {Event} evt
+         */
+        performAction(source, evt) {
+            this.__parent.header.setHtml("I have been clicked");
+        }
+    }
+    MyApp.MyApp$0 = MyApp$0;
+    MyApp$0["__interfaces"] = ["framework.components.api.EventListener"];
+})(MyApp || (MyApp = {}));
 class Nav extends JSContainer {
     constructor(name, tag) {
         super(name, tag);
-        /*private*/ this.type = Nav.Type.LINKS;
-        /*private*/ this.alignment = Nav.Alignment.HORIZONTAL;
-        /*private*/ this.spacing = Nav.Spacing.NONE;
+        this.type = Nav.Type.LINKS;
+        this.alignment = Nav.Alignment.HORIZONTAL;
+        this.spacing = Nav.Spacing.NONE;
         this.addClass("nav");
     }
     setJustifyContent(justifyContent) {
         {
-            let array142 = function () { let result = []; for (let val in Constants.JustifyContent) {
+            let array142 = /* Enum.values */ function () { let result = []; for (let val in Constants.JustifyContent) {
                 if (!isNaN(val)) {
                     result.push(parseInt(val, 10));
                 }
@@ -695,7 +739,7 @@ class Nav extends JSContainer {
     setType(type) {
         this.type = type;
         {
-            let array144 = function () { let result = []; for (let val in Nav.Type) {
+            let array144 = /* Enum.values */ function () { let result = []; for (let val in Nav.Type) {
                 if (!isNaN(val)) {
                     result.push(parseInt(val, 10));
                 }
@@ -732,7 +776,7 @@ class Nav extends JSContainer {
     setSpacing(spacing) {
         this.spacing = spacing;
         {
-            let array146 = function () { let result = []; for (let val in Nav.Spacing) {
+            let array146 = /* Enum.values */ function () { let result = []; for (let val in Nav.Spacing) {
                 if (!isNaN(val)) {
                     result.push(parseInt(val, 10));
                 }
@@ -756,7 +800,7 @@ class Nav extends JSContainer {
 Nav["__class"] = "framework.components.boostrap.Nav";
 Nav["__interfaces"] = ["framework.components.api.Renderable"];
 (function (Nav) {
-    var Type;
+    let Type;
     (function (Type) {
         Type[Type["PILLS"] = 0] = "PILLS";
         Type[Type["TABS"] = 1] = "TABS";
@@ -767,8 +811,9 @@ Nav["__interfaces"] = ["framework.components.api.Renderable"];
         constructor(_$ordinal, _$name, value) {
             this._$ordinal = _$ordinal;
             this._$name = _$name;
-            if (this.value === undefined)
+            if (this.value === undefined) {
                 this.value = null;
+            }
             this.value = value;
         }
         getValue() {
@@ -776,12 +821,13 @@ Nav["__interfaces"] = ["framework.components.api.Renderable"];
         }
         name() { return this._$name; }
         ordinal() { return this._$ordinal; }
+        compareTo(other) { return this._$ordinal - (isNaN(other) ? other._$ordinal : other); }
     }
     Nav.Type_$WRAPPER = Type_$WRAPPER;
     Type["__class"] = "framework.components.boostrap.Nav.Type";
-    Type["__interfaces"] = ["java.lang.Comparable", "java.io.Serializable"];
-    Type["_$wrappers"] = [new Type_$WRAPPER(0, "PILLS", "nav-pills"), new Type_$WRAPPER(1, "TABS", "nav-tabs"), new Type_$WRAPPER(2, "LINKS", "nav-links")];
-    var Alignment;
+    Type["__interfaces"] = ["java.lang.constant.Constable", "java.lang.Comparable", "java.io.Serializable"];
+    Type["_$wrappers"] = { 0: new Type_$WRAPPER(0, "PILLS", "nav-pills"), 1: new Type_$WRAPPER(1, "TABS", "nav-tabs"), 2: new Type_$WRAPPER(2, "LINKS", "nav-links") };
+    let Alignment;
     (function (Alignment) {
         Alignment[Alignment["VERTICAL"] = 0] = "VERTICAL";
         Alignment[Alignment["HORIZONTAL"] = 1] = "HORIZONTAL";
@@ -791,8 +837,9 @@ Nav["__interfaces"] = ["framework.components.api.Renderable"];
         constructor(_$ordinal, _$name, value) {
             this._$ordinal = _$ordinal;
             this._$name = _$name;
-            if (this.value === undefined)
+            if (this.value === undefined) {
                 this.value = null;
+            }
             this.value = value;
         }
         getValue() {
@@ -800,12 +847,13 @@ Nav["__interfaces"] = ["framework.components.api.Renderable"];
         }
         name() { return this._$name; }
         ordinal() { return this._$ordinal; }
+        compareTo(other) { return this._$ordinal - (isNaN(other) ? other._$ordinal : other); }
     }
     Nav.Alignment_$WRAPPER = Alignment_$WRAPPER;
     Alignment["__class"] = "framework.components.boostrap.Nav.Alignment";
-    Alignment["__interfaces"] = ["java.lang.Comparable", "java.io.Serializable"];
-    Alignment["_$wrappers"] = [new Alignment_$WRAPPER(0, "VERTICAL", "flex-column"), new Alignment_$WRAPPER(1, "HORIZONTAL", "")];
-    var Spacing;
+    Alignment["__interfaces"] = ["java.lang.constant.Constable", "java.lang.Comparable", "java.io.Serializable"];
+    Alignment["_$wrappers"] = { 0: new Alignment_$WRAPPER(0, "VERTICAL", "flex-column"), 1: new Alignment_$WRAPPER(1, "HORIZONTAL", "") };
+    let Spacing;
     (function (Spacing) {
         Spacing[Spacing["FILL"] = 0] = "FILL";
         Spacing[Spacing["JUSTIFIED"] = 1] = "JUSTIFIED";
@@ -816,8 +864,9 @@ Nav["__interfaces"] = ["framework.components.api.Renderable"];
         constructor(_$ordinal, _$name, value) {
             this._$ordinal = _$ordinal;
             this._$name = _$name;
-            if (this.value === undefined)
+            if (this.value === undefined) {
                 this.value = null;
+            }
             this.value = value;
         }
         getValue() {
@@ -825,11 +874,12 @@ Nav["__interfaces"] = ["framework.components.api.Renderable"];
         }
         name() { return this._$name; }
         ordinal() { return this._$ordinal; }
+        compareTo(other) { return this._$ordinal - (isNaN(other) ? other._$ordinal : other); }
     }
     Nav.Spacing_$WRAPPER = Spacing_$WRAPPER;
     Spacing["__class"] = "framework.components.boostrap.Nav.Spacing";
-    Spacing["__interfaces"] = ["java.lang.Comparable", "java.io.Serializable"];
-    Spacing["_$wrappers"] = [new Spacing_$WRAPPER(0, "FILL", "nav-fill"), new Spacing_$WRAPPER(1, "JUSTIFIED", "nav-justified"), new Spacing_$WRAPPER(2, "NONE", "")];
+    Spacing["__interfaces"] = ["java.lang.constant.Constable", "java.lang.Comparable", "java.io.Serializable"];
+    Spacing["_$wrappers"] = { 0: new Spacing_$WRAPPER(0, "FILL", "nav-fill"), 1: new Spacing_$WRAPPER(1, "JUSTIFIED", "nav-justified"), 2: new Spacing_$WRAPPER(2, "NONE", "") };
 })(Nav || (Nav = {}));
 class NavItem extends JSContainer {
     constructor(name, tag) {
@@ -842,12 +892,13 @@ NavItem["__interfaces"] = ["framework.components.api.Renderable"];
 class Progress extends JSContainer {
     constructor(name) {
         super(name, "div");
-        /*private*/ this.bar = new JSContainer("bar", "div").addClass("progress-bar");
-        /*private*/ this.min = 0;
-        /*private*/ this.max = 100;
-        /*private*/ this.value = 0;
-        if (this.context === undefined)
+        this.bar = new JSContainer("bar", "div").addClass("progress-bar");
+        if (this.context === undefined) {
             this.context = null;
+        }
+        this.min = 0;
+        this.max = 100;
+        this.value = 0;
         this.addClass("progress");
         this.addChild(this.bar);
         this.bar.setAttribute("aria-valuemin", this.min.toString());
@@ -891,7 +942,7 @@ class Progress extends JSContainer {
     setContext(context) {
         this.context = context;
         {
-            let array148 = function () { let result = []; for (let val in Constants.Context) {
+            let array148 = /* Enum.values */ function () { let result = []; for (let val in Constants.Context) {
                 if (!isNaN(val)) {
                     result.push(parseInt(val, 10));
                 }
@@ -926,9 +977,9 @@ class Progress extends JSContainer {
     setValue(value) {
         this.value = value;
         this.bar.setAttribute("aria-valuenow", value.toString());
-        let OldRange = this.max - this.min;
-        let NewRange = 100;
-        let NewValue = ((((value - this.min) * NewRange) / OldRange | 0)) + 0;
+        const OldRange = this.max - this.min;
+        const NewRange = 100;
+        const NewValue = ((((value - this.min) * NewRange) / OldRange | 0)) + 0;
         this.bar.setStyle("width", NewValue + "%");
     }
     getBar() {
@@ -946,10 +997,10 @@ Progress["__interfaces"] = ["framework.components.api.Renderable"];
 class Alert extends BaseBootstrap {
     constructor(name) {
         super(name, "div");
-        /*private*/ this.heading = new JSContainer("heading", "h4").addClass("alert-heading");
-        /*private*/ this.body = new JSContainer("body", "div");
-        /*private*/ this.__close = new JSContainer("close", "button").setAttribute("type", "button").addClass("close").setAttribute("data-dismiss", "alert").setAttribute("aria-label", "close");
-        /*private*/ this.closing = false;
+        this.heading = new JSContainer("heading", "h4").addClass("alert-heading");
+        this.body = new JSContainer("body", "div");
+        this.__close = new JSContainer("close", "button").setAttribute("type", "button").addClass("close").setAttribute("data-dismiss", "alert").setAttribute("aria-label", "close");
+        this.closing = false;
         this.addClass("alert");
         this.setAttribute("role", "alert");
         this.addChild(this.heading.setStyle("display", "none"));
@@ -958,7 +1009,7 @@ class Alert extends BaseBootstrap {
         this.addClass("fade");
         this.getNative().addEventListener("animationend", (e) => {
             if (this.closing) {
-                let evt = new CustomEvent("closed.bs.alert");
+                const evt = new CustomEvent("closed.bs.alert");
                 evt["source"] = this;
                 this.fireListener("closed.bs.alert", evt);
                 this.closing = false;
@@ -1008,7 +1059,7 @@ class Alert extends BaseBootstrap {
         }
         else {
             this.closing = true;
-            let evt = new CustomEvent("close.bs.alert");
+            const evt = new CustomEvent("close.bs.alert");
             evt["source"] = this;
             this.fireListener("close.bs.alert", evt);
             this.closing = true;
@@ -1045,11 +1096,11 @@ Badge["__interfaces"] = ["framework.components.api.Renderable"];
 class Button extends BaseBootstrap {
     constructor(name, tag) {
         super(name, tag);
-        /*private*/ this.outline = false;
-        /*private*/ this.disabled = false;
-        /*private*/ this.block = false;
-        /*private*/ this.size = Constants.Size.NORMAL;
-        if (((o1, o2) => o1.toUpperCase() === (o2 === null ? o2 : o2.toUpperCase()))(tag, "a")) {
+        this.outline = false;
+        this.disabled = false;
+        this.block = false;
+        this.size = Constants.Size.NORMAL;
+        if ( /* equalsIgnoreCase */((o1, o2) => o1.toUpperCase() === (o2 === null ? o2 : o2.toUpperCase()))(tag, "a")) {
             this.setAttribute("role", "button");
             this.setAttribute("href", "javascript:void(0);");
         }
@@ -1106,7 +1157,7 @@ class Button extends BaseBootstrap {
     setDisabled(disabled) {
         this.disabled = disabled;
         if (disabled) {
-            if (((o1, o2) => o1.toUpperCase() === (o2 === null ? o2 : o2.toUpperCase()))(this.getTag(), "a")) {
+            if ( /* equalsIgnoreCase */((o1, o2) => o1.toUpperCase() === (o2 === null ? o2 : o2.toUpperCase()))(this.getTag(), "a")) {
                 this.setAttribute("aria-disabled", "true");
                 if (!this.hasClass("disabled"))
                     this.addClass("disabled");
@@ -1117,7 +1168,7 @@ class Button extends BaseBootstrap {
             }
         }
         else {
-            if (((o1, o2) => o1.toUpperCase() === (o2 === null ? o2 : o2.toUpperCase()))(this.getTag(), "a")) {
+            if ( /* equalsIgnoreCase */((o1, o2) => o1.toUpperCase() === (o2 === null ? o2 : o2.toUpperCase()))(this.getTag(), "a")) {
                 this.setAttribute("aria-disabled", null);
                 if (this.hasClass("disabled"))
                     this.removeClass("disabled");
@@ -1191,4 +1242,4 @@ class ListGroupItem extends BaseBootstrap {
 }
 ListGroupItem["__class"] = "framework.components.boostrap.ListGroupItem";
 ListGroupItem["__interfaces"] = ["framework.components.api.Renderable"];
-Boot.main(null);
+Broot.main(null);
