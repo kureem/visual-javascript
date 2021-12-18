@@ -45,10 +45,8 @@ public class Carousel extends JSContainer{
 	public void setCrossFade(boolean b) {
 		if(b && !hasClass("carousel-fade")) {
 			addClass("carousel-fade");
-		}else {
-			if(hasClass("carousel-fade")) {
-				removeClass("carousel-fade");
-			}
+		}else if(!b && hasClass("carousel-fade")){
+			removeClass("carousel-fade");
 		}
 	}
 	

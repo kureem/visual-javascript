@@ -7,10 +7,15 @@ public class Constants {
 		PRIMARY("primary"), 
 		SECONDARY("secondary"), 
 		SUCCESS("success"), 
-		DANGER("danger"), WARNING("warning"),
+		DANGER("danger"), 
+		WARNING("warning"),
 		INFO("info"), 
 		LIGHT("light"), 
-		DARK("dark");
+		DARK("dark"),
+		BODY("body"),
+		WHITE("white"),
+		TRANSPARENT("transparent"),
+		;
 
 		private String value;
 
@@ -28,7 +33,9 @@ public class Constants {
 	public enum Size{
 		
 		SMALL("sm"),
+		MEDIUM("md"),
 		LARGE("lg"),
+		EXTRA_LARGE("xl"),
 		NORMAL("");
 
 		private String value;
@@ -49,6 +56,7 @@ public class Constants {
 		CENTER("center"),
 		END("end"),
 		AROUND("around"),
+		EVENLY("evenly"),
 		BETWEEN("between");
 		
 		
@@ -65,10 +73,13 @@ public class Constants {
 	}
 	
 	public enum ScreenSize {
+		NORMAL(""),
 		SMALL("sm"),
 		MEDIUM("md"),
 		LARGE("lg"),
-		EXTRA_LARGE("xl");
+		EXTRA_LARGE("xl"),
+		EXTRA_EXTRA_LARGE("xxl"),
+		;
 		
 		
 		private String value;
@@ -82,6 +93,9 @@ public class Constants {
 		}
 
 	}
+	
+	
+	
 	
 
 }
