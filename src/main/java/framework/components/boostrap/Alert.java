@@ -3,7 +3,7 @@ package framework.components.boostrap;
 import framework.components.JSContainer;
 import jsweet.dom.CustomEvent;
 
-public class Alert extends BaseBootstrap {
+public class Alert extends AbstractBootstrap {
 
 	private JSContainer heading = new JSContainer("heading", "h4").addClass("alert-heading");
 

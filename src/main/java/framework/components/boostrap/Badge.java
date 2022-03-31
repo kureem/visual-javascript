@@ -1,6 +1,6 @@
 package framework.components.boostrap;
 
-public class Badge extends BaseBootstrap{
+public class Badge extends AbstractBootstrap{
  
 	public Badge(String name, String tag) {
 		super(name, tag);

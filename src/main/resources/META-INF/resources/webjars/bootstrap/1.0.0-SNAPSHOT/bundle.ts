@@ -1,6 +1,6 @@
 /* Generated from Java with JSweet 3.0.0 - http://www.jsweet.org */
 namespace boostrap {
-    export abstract class BaseBootstrap extends JSContainer {
+    export abstract class AbstractBootstrap extends JSContainer {
         /*private*/ context: boostrap.Constants.Context;
 
         public constructor(name: string, tag: string) {
@@ -9,7 +9,7 @@ namespace boostrap {
             this.addClass(this.getBoostrapName());
         }
 
-        public setContext(context: boostrap.Constants.Context): BaseBootstrap {
+        public setContext(context: boostrap.Constants.Context): AbstractBootstrap {
             this.context = context;
             this.clearContexts();
             if (context != null)this.addClass(this.getBoostrapName() + "-" + boostrap.Constants.Context["_$wrappers"][context].getValue());
@@ -20,11 +20,11 @@ namespace boostrap {
             this.setContext(this.context);
         }
 
-        clearContexts(): BaseBootstrap {
+        clearContexts(): AbstractBootstrap {
             {
-                let array198 = /* Enum.values */function() { let result: boostrap.Constants.Context[] = []; for(let val in boostrap.Constants.Context) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
-                for(let index197=0; index197 < array198.length; index197++) {
-                    let context = array198[index197];
+                let array162 = /* Enum.values */function() { let result: boostrap.Constants.Context[] = []; for(let val in boostrap.Constants.Context) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
+                for(let index161=0; index161 < array162.length; index161++) {
+                    let context = array162[index161];
                     {
                         this.removeClass(this.getBoostrapName() + "-" + boostrap.Constants.Context["_$wrappers"][context].getValue());
                     }
@@ -39,8 +39,8 @@ namespace boostrap {
 
         public abstract getBoostrapName(): string;
     }
-    BaseBootstrap["__class"] = "framework.components.boostrap.BaseBootstrap";
-    BaseBootstrap["__interfaces"] = ["framework.components.api.Renderable"];
+    AbstractBootstrap["__class"] = "framework.components.boostrap.AbstractBootstrap";
+    AbstractBootstrap["__interfaces"] = ["framework.components.api.Renderable"];
 
 
 }
@@ -59,9 +59,9 @@ namespace boostrap {
 
         public activate(name: string) {
             {
-                let array200 = this.getChildren();
-                for(let index199=0; index199 < array200.length; index199++) {
-                    let r = array200[index199];
+                let array164 = this.getChildren();
+                for(let index163=0; index163 < array164.length; index163++) {
+                    let r = array164[index163];
                     {
                         const item: Breadcrumb.BreadcrumbItem = <Breadcrumb.BreadcrumbItem><any>r;
                         if (item.getName() === name){
@@ -157,6 +157,29 @@ namespace boostrap {
         }
 
     }
+
+}
+namespace boostrap {
+    export enum Breakpoint {
+        EXTRA_SMALL, SMALL, MEDIUM, LARGE, EXTRA_LARGE, EXTRA_EXTRA_LARGE
+    }
+
+    /** @ignore */
+    export class Breakpoint_$WRAPPER {
+        public value;
+
+        constructor(protected _$ordinal: number, protected _$name: string, value) {
+            if (this.value === undefined) { this.value = null; }
+            this.value = value;
+        }
+        public name(): string { return this._$name; }
+        public ordinal(): number { return this._$ordinal; }
+        public compareTo(other: any): number { return this._$ordinal - (isNaN(other)?other._$ordinal:other); }
+    }
+    Breakpoint["__class"] = "framework.components.boostrap.Breakpoint";
+    Breakpoint["__interfaces"] = ["java.lang.constant.Constable","java.lang.Comparable","java.io.Serializable"];
+
+    Breakpoint["_$wrappers"] = {0: new Breakpoint_$WRAPPER(0, "EXTRA_SMALL", "xs"), 1: new Breakpoint_$WRAPPER(1, "SMALL", "sm"), 2: new Breakpoint_$WRAPPER(2, "MEDIUM", "md"), 3: new Breakpoint_$WRAPPER(3, "LARGE", "lg"), 4: new Breakpoint_$WRAPPER(4, "EXTRA_LARGE", "xl"), 5: new Breakpoint_$WRAPPER(5, "EXTRA_EXTRA_LARGE", "xxl")};
 
 }
 namespace boostrap {
@@ -642,6 +665,58 @@ namespace boostrap {
 
 }
 namespace boostrap {
+    export class Container extends JSContainer {
+        public constructor(name: string, tag: string) {
+            super(name, tag);
+            this.addClass("container");
+        }
+
+        public setBreakpoint(breakpoint: boostrap.Breakpoint): Container {
+            this.clearCls();
+            if (breakpoint != null){
+                this.addClass("container-" + boostrap.Breakpoint["_$wrappers"][breakpoint].value);
+            } else {
+                this.addClass("container");
+            }
+            return this;
+        }
+
+        public setFluid(b: boolean): Container {
+            this.clearCls();
+            if (b){
+                this.addClass("container-fluid");
+            } else {
+                this.addClass("container");
+            }
+            return this;
+        }
+
+        public reset(): Container {
+            this.clearCls();
+            this.addClass("container");
+            return this;
+        }
+
+        /*private*/ clearCls() {
+            {
+                let array166 = /* Enum.values */function() { let result: boostrap.Breakpoint[] = []; for(let val in boostrap.Breakpoint) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
+                for(let index165=0; index165 < array166.length; index165++) {
+                    let bk = array166[index165];
+                    {
+                        this.removeClass("container-" + boostrap.Breakpoint["_$wrappers"][bk].value);
+                    }
+                }
+            }
+            this.removeClass("container");
+            this.removeClass("container-fluid");
+        }
+    }
+    Container["__class"] = "framework.components.boostrap.Container";
+    Container["__interfaces"] = ["framework.components.api.Renderable"];
+
+
+}
+namespace boostrap {
     export class Dropdown extends JSContainer {
         /*private*/ button: boostrap.Button;
 
@@ -779,9 +854,9 @@ namespace boostrap {
         /*private*/ clearHorizontalCls() {
             this.removeClass("list-group-horizontal");
             {
-                let array202 = /* Enum.values */function() { let result: boostrap.Constants.ScreenSize[] = []; for(let val in boostrap.Constants.ScreenSize) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
-                for(let index201=0; index201 < array202.length; index201++) {
-                    let size = array202[index201];
+                let array168 = /* Enum.values */function() { let result: boostrap.Constants.ScreenSize[] = []; for(let val in boostrap.Constants.ScreenSize) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
+                for(let index167=0; index167 < array168.length; index167++) {
+                    let size = array168[index167];
                     {
                         this.removeClass("list-group-horizontal-" + boostrap.Constants.ScreenSize["_$wrappers"][size].getValue());
                     }
@@ -916,9 +991,9 @@ namespace boostrap {
         public setSize(size: boostrap.Constants.Size): Modal {
             if (size === boostrap.Constants.Size.NORMAL){
                 {
-                    let array204 = /* Enum.values */function() { let result: boostrap.Constants.Size[] = []; for(let val in boostrap.Constants.Size) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
-                    for(let index203=0; index203 < array204.length; index203++) {
-                        let si = array204[index203];
+                    let array170 = /* Enum.values */function() { let result: boostrap.Constants.Size[] = []; for(let val in boostrap.Constants.Size) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
+                    for(let index169=0; index169 < array170.length; index169++) {
+                        let si = array170[index169];
                         {
                             if (this.dialog.hasClass("modal-" + boostrap.Constants.Size["_$wrappers"][si].getValue())){
                                 this.dialog.removeClass("modal-" + boostrap.Constants.Size["_$wrappers"][si].getValue());
@@ -928,9 +1003,9 @@ namespace boostrap {
                 }
             } else {
                 {
-                    let array206 = /* Enum.values */function() { let result: boostrap.Constants.Size[] = []; for(let val in boostrap.Constants.Size) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
-                    for(let index205=0; index205 < array206.length; index205++) {
-                        let si = array206[index205];
+                    let array172 = /* Enum.values */function() { let result: boostrap.Constants.Size[] = []; for(let val in boostrap.Constants.Size) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
+                    for(let index171=0; index171 < array172.length; index171++) {
+                        let si = array172[index171];
                         {
                             if ((si === size) && !this.dialog.hasClass("modal-" + boostrap.Constants.Size["_$wrappers"][si].getValue())){
                                 this.dialog.addClass("modal-" + boostrap.Constants.Size["_$wrappers"][si].getValue());
@@ -956,9 +1031,9 @@ namespace boostrap {
                     this.dialog.removeClass("modal-fullscreen");
                 }
                 {
-                    let array208 = /* Enum.values */function() { let result: boostrap.Constants.ScreenSize[] = []; for(let val in boostrap.Constants.ScreenSize) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
-                    for(let index207=0; index207 < array208.length; index207++) {
-                        let s = array208[index207];
+                    let array174 = /* Enum.values */function() { let result: boostrap.Constants.ScreenSize[] = []; for(let val in boostrap.Constants.ScreenSize) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
+                    for(let index173=0; index173 < array174.length; index173++) {
+                        let s = array174[index173];
                         {
                             if (s !== boostrap.Constants.ScreenSize.NORMAL){
                                 this.dialog.removeClass("modal-fullscreen-" + boostrap.Constants.ScreenSize["_$wrappers"][s].getValue() + "-down");
@@ -969,9 +1044,9 @@ namespace boostrap {
             } else {
                 if (b){
                     {
-                        let array210 = /* Enum.values */function() { let result: boostrap.Constants.ScreenSize[] = []; for(let val in boostrap.Constants.ScreenSize) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
-                        for(let index209=0; index209 < array210.length; index209++) {
-                            let s = array210[index209];
+                        let array176 = /* Enum.values */function() { let result: boostrap.Constants.ScreenSize[] = []; for(let val in boostrap.Constants.ScreenSize) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
+                        for(let index175=0; index175 < array176.length; index175++) {
+                            let s = array176[index175];
                             {
                                 if (s === size){
                                     if (!this.dialog.hasClass("modal-fullscreen-" + boostrap.Constants.ScreenSize["_$wrappers"][s].getValue() + "-down")){
@@ -987,9 +1062,9 @@ namespace boostrap {
                     }
                 } else {
                     {
-                        let array212 = /* Enum.values */function() { let result: boostrap.Constants.ScreenSize[] = []; for(let val in boostrap.Constants.ScreenSize) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
-                        for(let index211=0; index211 < array212.length; index211++) {
-                            let s = array212[index211];
+                        let array178 = /* Enum.values */function() { let result: boostrap.Constants.ScreenSize[] = []; for(let val in boostrap.Constants.ScreenSize) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
+                        for(let index177=0; index177 < array178.length; index177++) {
+                            let s = array178[index177];
                             {
                                 if (s !== boostrap.Constants.ScreenSize.NORMAL){
                                     this.dialog.removeClass("modal-fullscreen-" + boostrap.Constants.ScreenSize["_$wrappers"][s].getValue() + "-down");
@@ -1104,9 +1179,9 @@ namespace boostrap {
 
         public setJustifyContent(justifyContent: boostrap.Constants.JustifyContent): Nav {
             {
-                let array214 = /* Enum.values */function() { let result: boostrap.Constants.JustifyContent[] = []; for(let val in boostrap.Constants.JustifyContent) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
-                for(let index213=0; index213 < array214.length; index213++) {
-                    let js = array214[index213];
+                let array180 = /* Enum.values */function() { let result: boostrap.Constants.JustifyContent[] = []; for(let val in boostrap.Constants.JustifyContent) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
+                for(let index179=0; index179 < array180.length; index179++) {
+                    let js = array180[index179];
                     {
                         this.removeClass("justify-content-" + boostrap.Constants.JustifyContent["_$wrappers"][js].getValue());
                     }
@@ -1123,9 +1198,9 @@ namespace boostrap {
         public setType(type: Nav.Type) {
             this.type = type;
             {
-                let array216 = /* Enum.values */function() { let result: boostrap.Nav.Type[] = []; for(let val in boostrap.Nav.Type) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
-                for(let index215=0; index215 < array216.length; index215++) {
-                    let t = array216[index215];
+                let array182 = /* Enum.values */function() { let result: boostrap.Nav.Type[] = []; for(let val in boostrap.Nav.Type) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
+                for(let index181=0; index181 < array182.length; index181++) {
+                    let t = array182[index181];
                     {
                         if (boostrap.Nav.Type["_$wrappers"][t].getValue() !== boostrap.Nav.Type["_$wrappers"][type].getValue() && boostrap.Nav.Type["_$wrappers"][t].getValue() !== boostrap.Nav.Type["_$wrappers"][Nav.Type.LINKS].getValue())this.removeClass(boostrap.Nav.Type["_$wrappers"][t].getValue());
                     }
@@ -1158,9 +1233,9 @@ namespace boostrap {
         public setSpacing(spacing: Nav.Spacing) {
             this.spacing = spacing;
             {
-                let array218 = /* Enum.values */function() { let result: boostrap.Nav.Spacing[] = []; for(let val in boostrap.Nav.Spacing) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
-                for(let index217=0; index217 < array218.length; index217++) {
-                    let s = array218[index217];
+                let array184 = /* Enum.values */function() { let result: boostrap.Nav.Spacing[] = []; for(let val in boostrap.Nav.Spacing) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
+                for(let index183=0; index183 < array184.length; index183++) {
+                    let s = array184[index183];
                     {
                         if (boostrap.Nav.Spacing["_$wrappers"][s].getValue() !== boostrap.Nav.Spacing["_$wrappers"][Nav.Spacing.NONE].getValue()){
                             if (boostrap.Nav.Spacing["_$wrappers"][s].getValue() !== boostrap.Nav.Spacing["_$wrappers"][spacing].getValue() && this.hasClass(boostrap.Nav.Spacing["_$wrappers"][s].getValue())){
@@ -1296,9 +1371,9 @@ namespace boostrap {
 
         applyContext(ctn: JSContainer, ctx: boostrap.Constants.Context, prefix: string): NavBar {
             {
-                let array220 = /* Enum.values */function() { let result: boostrap.Constants.Context[] = []; for(let val in boostrap.Constants.Context) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
-                for(let index219=0; index219 < array220.length; index219++) {
-                    let ct = array220[index219];
+                let array186 = /* Enum.values */function() { let result: boostrap.Constants.Context[] = []; for(let val in boostrap.Constants.Context) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
+                for(let index185=0; index185 < array186.length; index185++) {
+                    let ct = array186[index185];
                     {
                         if (ct === ctx){
                             if (!ctn.hasClass(prefix + "-" + boostrap.Constants.Context["_$wrappers"][ct].getValue())){
@@ -1321,9 +1396,9 @@ namespace boostrap {
 
         public setExpandSize(size: boostrap.Constants.Size): NavBar {
             {
-                let array222 = /* Enum.values */function() { let result: boostrap.Constants.Size[] = []; for(let val in boostrap.Constants.Size) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
-                for(let index221=0; index221 < array222.length; index221++) {
-                    let si = array222[index221];
+                let array188 = /* Enum.values */function() { let result: boostrap.Constants.Size[] = []; for(let val in boostrap.Constants.Size) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
+                for(let index187=0; index187 < array188.length; index187++) {
+                    let si = array188[index187];
                     {
                         if (si === size){
                             if ((size !== boostrap.Constants.Size.NORMAL) && !this.hasClass("navbar-expand-" + boostrap.Constants.Size["_$wrappers"][si].getValue())){
@@ -1359,9 +1434,9 @@ namespace boostrap {
         public setPlacement(plc: NavBar.Placement): NavBar {
             if (plc !== NavBar.Placement.DEFAULT){
                 {
-                    let array224 = /* Enum.values */function() { let result: boostrap.NavBar.Placement[] = []; for(let val in boostrap.NavBar.Placement) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
-                    for(let index223=0; index223 < array224.length; index223++) {
-                        let pl = array224[index223];
+                    let array190 = /* Enum.values */function() { let result: boostrap.NavBar.Placement[] = []; for(let val in boostrap.NavBar.Placement) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
+                    for(let index189=0; index189 < array190.length; index189++) {
+                        let pl = array190[index189];
                         {
                             if ((pl === plc) && !this.hasClass(boostrap.NavBar.Placement["_$wrappers"][pl].getValue())){
                                 this.addClass(boostrap.NavBar.Placement["_$wrappers"][pl].getValue());
@@ -1373,9 +1448,9 @@ namespace boostrap {
                 }
             } else {
                 {
-                    let array226 = /* Enum.values */function() { let result: boostrap.NavBar.Placement[] = []; for(let val in boostrap.NavBar.Placement) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
-                    for(let index225=0; index225 < array226.length; index225++) {
-                        let pl = array226[index225];
+                    let array192 = /* Enum.values */function() { let result: boostrap.NavBar.Placement[] = []; for(let val in boostrap.NavBar.Placement) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
+                    for(let index191=0; index191 < array192.length; index191++) {
+                        let pl = array192[index191];
                         {
                             if (pl !== NavBar.Placement.DEFAULT)this.removeClass(boostrap.NavBar.Placement["_$wrappers"][pl].getValue());
                         }
@@ -1476,9 +1551,9 @@ namespace boostrap {
 
         public setSize(size: boostrap.Constants.Size): Pagination {
             {
-                let array228 = /* Enum.values */function() { let result: boostrap.Constants.Size[] = []; for(let val in boostrap.Constants.Size) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
-                for(let index227=0; index227 < array228.length; index227++) {
-                    let si = array228[index227];
+                let array194 = /* Enum.values */function() { let result: boostrap.Constants.Size[] = []; for(let val in boostrap.Constants.Size) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
+                for(let index193=0; index193 < array194.length; index193++) {
+                    let si = array194[index193];
                     {
                         if (si === size){
                             if ((size !== boostrap.Constants.Size.NORMAL) && !this.hasClass("pagination-" + boostrap.Constants.Size["_$wrappers"][si].getValue())){
@@ -1497,9 +1572,9 @@ namespace boostrap {
 
         public setJustifyContent(justifyContent: boostrap.Constants.JustifyContent): Pagination {
             {
-                let array230 = /* Enum.values */function() { let result: boostrap.Constants.JustifyContent[] = []; for(let val in boostrap.Constants.JustifyContent) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
-                for(let index229=0; index229 < array230.length; index229++) {
-                    let js = array230[index229];
+                let array196 = /* Enum.values */function() { let result: boostrap.Constants.JustifyContent[] = []; for(let val in boostrap.Constants.JustifyContent) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
+                for(let index195=0; index195 < array196.length; index195++) {
+                    let js = array196[index195];
                     {
                         this.removeClass("justify-content-" + boostrap.Constants.JustifyContent["_$wrappers"][js].getValue());
                     }
@@ -1580,9 +1655,9 @@ namespace boostrap {
         public setContext(context: boostrap.Constants.Context) {
             this.context = context;
             {
-                let array232 = /* Enum.values */function() { let result: boostrap.Constants.Context[] = []; for(let val in boostrap.Constants.Context) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
-                for(let index231=0; index231 < array232.length; index231++) {
-                    let ct = array232[index231];
+                let array198 = /* Enum.values */function() { let result: boostrap.Constants.Context[] = []; for(let val in boostrap.Constants.Context) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
+                for(let index197=0; index197 < array198.length; index197++) {
+                    let ct = array198[index197];
                     {
                         this.bar.removeClass("bg-" + boostrap.Constants.Context["_$wrappers"][ct].getValue());
                     }
@@ -1635,9 +1710,9 @@ namespace boostrap.utils {
     export class FlexUtil {
         public static setJustifyContent(justifyContent: boostrap.Constants.JustifyContent, r: api.Renderable) {
             {
-                let array234 = /* Enum.values */function() { let result: boostrap.Constants.JustifyContent[] = []; for(let val in boostrap.Constants.JustifyContent) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
-                for(let index233=0; index233 < array234.length; index233++) {
-                    let js = array234[index233];
+                let array200 = /* Enum.values */function() { let result: boostrap.Constants.JustifyContent[] = []; for(let val in boostrap.Constants.JustifyContent) { if (!isNaN(<any>val)) { result.push(parseInt(val,10)); } } return result; }();
+                for(let index199=0; index199 < array200.length; index199++) {
+                    let js = array200[index199];
                     {
                         r.removeClass("justify-content-" + boostrap.Constants.JustifyContent["_$wrappers"][js].getValue());
                     }
@@ -1654,9 +1729,9 @@ namespace boostrap {
      * Bootstrap Alert implementation
      * @param {string} name
      * @class
-     * @extends boostrap.BaseBootstrap
+     * @extends boostrap.AbstractBootstrap
      */
-    export class Alert extends boostrap.BaseBootstrap {
+    export class Alert extends boostrap.AbstractBootstrap {
         /*private*/ heading: JSContainer;
 
         /*private*/ body: JSContainer;
@@ -1747,7 +1822,7 @@ namespace boostrap {
 
 }
 namespace boostrap {
-    export class Badge extends boostrap.BaseBootstrap {
+    export class Badge extends boostrap.AbstractBootstrap {
         public constructor(name: string, tag: string) {
             super(name, tag);
         }
@@ -1775,7 +1850,7 @@ namespace boostrap {
 
 }
 namespace boostrap {
-    export class Button extends boostrap.BaseBootstrap {
+    export class Button extends boostrap.AbstractBootstrap {
         /*private*/ outline: boolean;
 
         /*private*/ disabled: boolean;
@@ -1888,7 +1963,7 @@ namespace boostrap {
 
 }
 namespace boostrap {
-    export class ListGroupItem extends boostrap.BaseBootstrap {
+    export class ListGroupItem extends boostrap.AbstractBootstrap {
         public constructor(name: string, tag: string) {
             super(name, tag);
         }

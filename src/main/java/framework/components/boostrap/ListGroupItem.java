@@ -1,6 +1,6 @@
 package framework.components.boostrap;
 
-public class ListGroupItem extends BaseBootstrap{
+public class ListGroupItem extends AbstractBootstrap{
 
 	public ListGroupItem(String name, String tag) {
 		super(name, tag);

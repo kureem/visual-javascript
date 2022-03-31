@@ -1,10 +1,10 @@
 declare namespace boostrap {
-    abstract class BaseBootstrap extends JSContainer {
+    abstract class AbstractBootstrap extends JSContainer {
         context: boostrap.Constants.Context;
         constructor(name: string, tag: string);
-        setContext(context: boostrap.Constants.Context): BaseBootstrap;
+        setContext(context: boostrap.Constants.Context): AbstractBootstrap;
         refresh(): void;
-        clearContexts(): BaseBootstrap;
+        clearContexts(): AbstractBootstrap;
         getContext(): boostrap.Constants.Context;
         abstract getBoostrapName(): string;
     }
@@ -37,6 +37,26 @@ declare namespace boostrap {
                 constructor(__parent: any);
             }
         }
+    }
+}
+declare namespace boostrap {
+    enum Breakpoint {
+        EXTRA_SMALL = 0,
+        SMALL = 1,
+        MEDIUM = 2,
+        LARGE = 3,
+        EXTRA_LARGE = 4,
+        EXTRA_EXTRA_LARGE = 5
+    }
+    /** @ignore */
+    class Breakpoint_$WRAPPER {
+        protected _$ordinal: number;
+        protected _$name: string;
+        value: any;
+        constructor(_$ordinal: number, _$name: string, value: any);
+        name(): string;
+        ordinal(): number;
+        compareTo(other: any): number;
     }
 }
 declare namespace boostrap {
@@ -219,6 +239,15 @@ declare namespace boostrap {
             ordinal(): number;
             compareTo(other: any): number;
         }
+    }
+}
+declare namespace boostrap {
+    class Container extends JSContainer {
+        constructor(name: string, tag: string);
+        setBreakpoint(breakpoint: boostrap.Breakpoint): Container;
+        setFluid(b: boolean): Container;
+        reset(): Container;
+        clearCls(): void;
     }
 }
 declare namespace boostrap {
@@ -466,9 +495,9 @@ declare namespace boostrap {
      * Bootstrap Alert implementation
      * @param {string} name
      * @class
-     * @extends boostrap.BaseBootstrap
+     * @extends boostrap.AbstractBootstrap
      */
-    class Alert extends boostrap.BaseBootstrap {
+    class Alert extends boostrap.AbstractBootstrap {
         heading: JSContainer;
         body: JSContainer;
         __close: JSContainer;
@@ -487,7 +516,7 @@ declare namespace boostrap {
     }
 }
 declare namespace boostrap {
-    class Badge extends boostrap.BaseBootstrap {
+    class Badge extends boostrap.AbstractBootstrap {
         constructor(name: string, tag: string);
         /**
          *
@@ -498,7 +527,7 @@ declare namespace boostrap {
     }
 }
 declare namespace boostrap {
-    class Button extends boostrap.BaseBootstrap {
+    class Button extends boostrap.AbstractBootstrap {
         outline: boolean;
         disabled: boolean;
         block: boolean;
@@ -520,7 +549,7 @@ declare namespace boostrap {
     }
 }
 declare namespace boostrap {
-    class ListGroupItem extends boostrap.BaseBootstrap {
+    class ListGroupItem extends boostrap.AbstractBootstrap {
         constructor(name: string, tag: string);
         /**
          *

@@ -2,7 +2,7 @@ package framework.components.boostrap;
 
 import framework.components.boostrap.Constants.Size;
 
-public class Button extends BaseBootstrap{
+public class Button extends AbstractBootstrap{
 	
 	private boolean outline = false;
 	
